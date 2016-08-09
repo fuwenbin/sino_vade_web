@@ -1,0 +1,162 @@
+
+<div class="modal fade" id="update_vlan_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">			 
+			<form id="vlan_form" action="/hl/api/agent/vlan" method="POST" class="form-horizontal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">修改VLAN</h4>
+				</div>
+				<div class="modal-body">
+						<div class="form-group">
+							<label for="hostname" class="col-md-2 font-normal control-label">名称:</label>
+							<div class="col-md-6">
+							    <input type="text" class="form-control"  name="name" value="{{vlan['name']}}" />
+							</div>
+			            </div>
+		                <div class="form-group">
+		                    <label for="hostname" class="col-md-2 font-normal control-label">VLAN ID:</label>
+		                    <div class="col-md-6">
+		                        <input type="text" class="form-control" name="vlanid" value="{{vlan['vlanid']}}" />
+		                    </div>
+		                </div>
+						<div class="form-group">
+		                    <label for="hostname" class="col-md-2 font-normal control-label">WEB管理:</label>
+		                    <div class="col-md-8">
+		                       <div class="radio">
+		                            <label class="col-md-6">
+		                                <input type="radio" {% if vlan['web_enable'] == '1' %}checked{% end %} name="web_enable" value="1" />
+		                               	是
+		                            </label>
+		                            <label class="col-md-6">
+		                                <input type="radio" {% if vlan['web_enable']=='0' %}checked{% end %} name="web_enable" value="0"  />
+		                               	 否
+		                            </label>
+		                        </div>
+		                    </div>
+		                </div>
+						<div class="form-group">
+		                    <label for="hostname" class="col-md-2 font-normal control-label">SSH管理:</label>
+		                    <div class="col-md-8">
+		                        <div class="radio">
+		                            <label class="col-md-6">
+		                                <input type="radio" id="ssh_enable" name="ssh_enable" value="1" {% if vlan['ssh_enable'] =='1' %}checked{% end %} />
+		                               	 是
+		                            </label>
+		                            <label class="col-md-6">
+		                                <input type="radio" name="ssh_enable" value="0"  {% if vlan['ssh_enable']=='0' %}checked{% end %}/>
+		                               	 否
+		                            </label>
+		                        </div>
+		                    </div>
+		                </div>
+		
+						<div class="form-group"> 
+		                    <label for="hostname" class="col-md-2 font-normal control-label">IP地址:</label>
+		                    <div class="col-md-9" id="ipset">
+		                    	  {% for ipobj in vlan['ipaddrs'] %}
+		                    	    {% if ipobj['ip_type'] =='0' %}
+		                    	     <div class="input-group mt15 ip" >
+										<input  type="text" class="form-control ignore" disabled name="ip" value="{{ipobj['ip']}}" placeholder="请输入IPV4 类型地址" />
+							           	<span class="input-group-btn split"><a type="button" class="btn btn-white" >/</a> </span>
+							           	<div class="input-group-btn">
+											<input  type="text" class="form-control ignore" disabled style="width:68px;" value ="{{ipobj['netmask']}}" name="netmask_ipv6" placeholder="ip掩码" />
+										</div>
+										<div class="input-group-btn type">
+											<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">
+											{% if ipobj['type']=='0' %}主IP(Pimary){% else %} 辅IP(Secondary) {% end %}
+											<span class="caret"></span></button>
+										</div>
+							            <div class="input-group-btn">
+							                 <a class="btn btn-default delIp_btn" href="#"> <span class="glyphicon glyphicon-remove"></span></a>
+										</div>
+										<input type="hidden" name="ip_type" value="0" />
+							            <input type="hidden" name="type" value="0" />
+							         </div>
+		                    	   {% elif ipobj['ip_type']=='1' %}
+		                    	   <div class="input-group mt15 ip" >
+			                    	   	<input  type="text" class="form-control ignore" name="ip" disabled value="{{ipobj['ip']}}" placeholder="请输入IPV6 类型地址" />
+							           	<span class="input-group-btn split"><a type="button" class="btn btn-white"   >/</a> </span>
+							           	<div class="input-group-btn">
+											<input  type="text" class="form-control ignore" disabled style="width:68px;" name="netmask_ipv6" value="{{ipobj['netmask']}}" placeholder="ip掩码" />
+										</div>
+										<div class="input-group-btn type">
+											<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">
+											{% if ipobj['type']=='0' %}主IP(Pimary){% else %} 辅IP(Secondary) {% end %}
+											<span class="caret"></span></button>
+							                
+										</div>
+							            <div class="input-group-btn">
+							                 <a class="btn btn-default delIp_btn" href="#"> <span class="glyphicon glyphicon-remove"></span></a>
+										</div>
+										<input type="hidden" name="ip_type" value="1" />
+							            <input type="hidden" name="type" value="0" />
+							        </div>
+		                    	   
+		                    	   {% end %}
+		                    	{% end %}
+		                    	
+									<div class="input-group mt15 btn-div">
+			                    		<div class="btn-group">
+					                          <a class="btn btn-default addIp_btn ipv4btn" href="#"> IPV4 <span class="glyphicon glyphicon-plus"></span></a>
+					                          <a class="btn btn-default addIp_btn ipv6btn" href="#"> IPV6 <span class="glyphicon glyphicon-plus"></span></a>
+										  </div>
+			                    	</div>
+							</div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="hostname" class="col-md-2 font-normal control-label">端口成员:</label>
+		                    <div class="col-md-8 table-select">
+			                    <div class="col-md-6 p0">
+			                    	<table id="for_select_interface_table" class="table table-bordered">
+			                    		<thead>
+				                    		<tr>
+				                    			<th>候选端口</th>
+				                    		</tr>
+			                    		</thead>
+			                    		<tbody>
+			                    			{% for index in range(len(un_selected_interfaces)) %}
+			                    		
+				                    			<tr>
+				                    				<td>{{ un_selected_interfaces[index]}} <button type="button" style="float:right"><span class="add_interface_btn glyphicon glyphicon-plus"></span></button></td>
+				                    				
+				                    			</tr>
+			                    			{% end %}
+			                    		</tbody>
+			                    	</table>
+			                    </div>
+			                    <div class="col-md-6">
+			                    	<table id="selected_interface_table"  class="table table-bordered" >
+			                    		<thead >
+				                    		<tr>
+				                    			<th>已选端口</th>
+				                    		</tr>
+			                    		</thead>
+			                    		<tbody>
+			                    			{% for index in range(len(selected_interface_names)) %}
+				                    			<tr>
+				                    				<td>{{ selected_interface_names[index]}} <button type="button" style="float:right"><span class="add_interface_btn glyphicon glyphicon-remove"></span></button></td>
+				                    			</tr>
+			                    			{% end %}
+			                    		</tbody>
+			                    	</table>
+			                    
+			                    </div>
+			                    <div style="clear:both"> </div>
+		                    </div>
+		                </div>
+					
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				  <button type="button" class="btn btn-primary">保存</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	<script type="text/javascript">
+</script>
+	
+</div><!-- /.modal -->
+			
+			

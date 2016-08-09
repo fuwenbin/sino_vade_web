@@ -1,0 +1,98 @@
+{% extends 'content_template.html'%}
+{% block content%}
+<div class="frame-content container-fluid">
+	<div class="page-header">
+	    <h2>成员管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">负载均衡</a></li>
+		  <li class="active"><strong>成员管理</strong></li>
+		</ol>
+	</div>
+	<div class="container-fluid">
+		<div class="mb15">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a data-toggle="tab">成员列表</a>
+				</li>
+			</ul>
+		</div>
+		<div class="mb15">
+			<div class="btn-group">
+				<a class="btn btn-default" href="slbRserver/add/poolname/{$pool.name}">增加<span class="fa fa-plus"></span></a>
+			</div>
+			<div class="pull-right dropdown">
+				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					显示列
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="1" />IP地址</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="2" />应用端口</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="3" />启用</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="4" />权重</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="5" />最大请求数限制</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="6" />最大连接数限制</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="7" />最大带宽限制</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="8" />健康检查</label>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="mb15">
+			<table class="table table-hover table-bordered table-striped m0">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>IP地址</th>
+						<th>协议端口</th>
+						<th>权重</th>
+						<th>资源池</th>
+						<th>状态</th>
+						<th>管理状态</th>
+						<th>动作</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+				</tbody>
+			</table>
+			{% include '_pagination.html' %}
+		</div>
+	</div>
+</div>
+{% end %}

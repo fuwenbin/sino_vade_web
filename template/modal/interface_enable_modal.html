@@ -1,0 +1,95 @@
+
+<div class="modal fade" id="interface_enable_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="modal-title">修改端口</h4>
+			</div>
+			<div class="modal-body">
+			<form action="" method="POST" class="form-horizontal">
+				
+				<div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">是否启用:</label>
+                    <div class="col-md-9">
+                       <div class="radio">
+                            <label class="col-md-6" >
+                                <input type="radio" name="enable" value="on" />
+                               	是
+                            </label>
+                            <label class="col-md-6" >
+                                <input type="radio" name="enable" value="off" checked="checked" />
+                               	 否
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">trunk启用:</label>
+                    <div class="col-md-9">
+                       <div class="radio">
+                            <label class="col-md-6" >
+                                <input type="radio" name="mode" value="on"   checked="checked"/>
+                               	是
+                            </label>
+                            <label class="col-md-6" >
+                                <input type="radio" name="mode" value="off"/>
+                               	 否
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                     <label for="hostname" class="col-md-3 font-normal control-label">NATIVE:</label>
+                     <div class="col-md-8">
+                       	<input type="text" class="form-control" name="ip" value="" />
+                    </div>
+	            </div>
+                <div class="form-group ">
+                    <label for="hostname" class="col-md-3 font-normal control-label">vlan访问控制:</label>
+                    <div class="col-md-8 table-layout mt15">
+                    		<fieldset class="table-layout-cell fildset-set">
+                    			<legend class="clear-border">待选VLAN:</legend>
+		                     	<select id="for-select" class="form-control h200" multiple>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       		<option>VLAN1</option>
+		                       	</select>
+	                       	</fieldset>
+	                    	<div class="input-group-addon clear-border p0">
+	                    		<div class="">
+	                    			<a id="remove_vlans_btn" class="btn btn-default" style="float:left;" href="#"><span class="fa fa-angle-double-left"></span></a>
+	                    			<a id="add_vlans_btn" class="btn btn-default" style="float:left;" href="#"><span class="fa fa-angle-double-right"></span></a>
+	                    		</div>
+	                    	</div>
+	                     	<fieldset class="table-layout-cell fildset-set">
+	                     		<legend class="clear-border">已选VLAN:</legend>
+	                      		<select id="selected-options" class="form-control h200" multiple>
+		                       		<option>VLAN1</option>
+		                       		
+	                       		</select>
+                       		</fieldset>
+                    </div>
+               	</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		  <button type="button" class="btn btn-primary">保存</button>
+		</div>
+	</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+			
+			

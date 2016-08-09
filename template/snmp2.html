@@ -1,0 +1,38 @@
+{include file='header.html'}
+<div class="container-fluid">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a data-toggle="tab">网络白名单--详情</a>
+		</li>
+	</ul>
+	<div class="container-fluid mt15">
+		<form action="" method="POST" class="form-horizontal" role="form">
+			<div class="form-group">
+                <label for="username" class="col-md-2 h34">用户名:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control w300" id="username" name="username" value="{$user.username}" />
+                </div>
+            </div>	           
+            <div class="form-group">
+                <label for="password" class="col-md-2 h34">密码:</label>
+                <div class="col-md-10">
+                    <input type="password" class="form-control w300" name="password" id="password" value="{$user.password}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="rpassword" class="col-md-2 h34">确认密码:</label>
+                <div class="col-md-10">
+                    <input type="password" class="form-control w300" id="rpassword" name="password" value="{$user.password}" />
+                </div>
+            </div>	
+            <div class="form-group">
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>保存</button>
+                    <button type="reset" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>重置</button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span>取消</button>
+                </div>
+            </div>
+		</form>
+	</div>
+</div>
+{include file='footer.html'}

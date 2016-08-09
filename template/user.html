@@ -1,0 +1,85 @@
+{% extends 'content_template.html'%}
+
+{% block content%}
+
+<div class="frame-content container-fluid">
+	<div class="page-header">
+	    <h2>用户管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">系统管理</a></li>
+		  <li class="active"><strong>用户管理</strong></li>
+		</ol>
+	</div>
+	<div class="container-fluid">
+		<div class="mb15">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="module/user">用户列表</a></li>
+				<li><a href="module/role">角色管理</a></li>
+				<li><a href="module/auth">认证管理</a></li>
+			</ul>
+		</div>
+		<div class="mb15">
+			<div class="btn-group">
+				<a class="btn btn-default" href="user/add">增加<span class="fa fa-plus"></span></a>
+				<a class="btn btn-default action-delete" href="user/delete">删除<span class="fa fa-remove"></span></a>
+				<a class="btn btn-default action-edit" href="user/edit">修改<span class="fa fa-edit"></span></a>
+				<a class="btn btn-default" href="javascript:location.reload();">刷新<span class="fa fa-refresh"></span></a>
+			</div>
+			<div class="pull-right dropdown">
+				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					显示列
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="1" />用户名</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="2" />密码</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="3" />角色</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="4" />认证模式</label>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="mb15">
+			<table class="table table-hover table-bordered table-striped m0">
+				<thead>
+					<tr>
+						<th>
+							<div class="checkbox m0">
+								<label>
+									<input class="action-select" type="checkbox" value="" />
+								</label>
+							</div>
+						</th>
+						<th>用户名</th>												
+						<th>密码</th>																					
+						<th>角色</th>	
+						<th>认证模式</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+			{% include '_pagination.html' %}
+		</div>
+
+	</div>
+</div>
+{% end %}

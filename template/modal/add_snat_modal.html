@@ -1,0 +1,93 @@
+
+<div class="modal fade" id="snat_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="modal-title">增加SNAT</h4>
+			</div>
+			<div class="modal-body">
+			  <form action="" method="POST" class="form-horizontal">
+				<div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">SNAT策略:</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="hostname" name="hostname" value="" />
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">SNAT规则类型:</label>
+                    <div class="col-md-6">
+                       <div class="radio">
+                            <label>
+                                <input type="radio" id="network-sync" name="network-sync" value="on" />
+                               	虚拟服务器引用
+                            </label>
+                            <label>
+                                <input type="radio" name="network-sync" value="off" checked="checked" />
+                               	 全局生效
+                            </label>
+                        </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">SNAT策略控制:</label>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" id="network-sync" name="network-sync" value="on" />
+                               	 启用
+                            </label>
+                            <label>
+                                <input type="radio" name="network-sync" value="off" checked="checked" />
+                               	 禁用
+                            </label>
+                        </div>
+                    </div>
+                </div>
+				<div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">源地址:</label>
+                    <div class="col-md-6">
+                       <select class="form-control" id="role" name="role">
+    						<option value="administrator">所有ip地址</option>
+    						<option value="system">ip地址列表</option>
+    					</select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">转换地址:</label>
+                    <div class="col-md-6">
+                        <select class="form-control" id="role" name="role">
+    						<option value="administrator">vlan缺省ip地址</option>
+    						<option value="system">IP地址列表</option>
+    						<option value="outer">noNAT</option>
+    					</select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 font-normal control-label">转换地址策略:</label>
+                    <div class="col-md-6">
+                        <select class="form-control" id="role" name="role">
+    						<option value="administrator">连接轮询</option>
+    					</select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hostname" class="col-md-3 font-normal control-label">绑定VLAN:</label>
+                    <div class="col-md-6">
+                        <select class="form-control" id="role" name="role">
+    						<option value="administrator">vlan_server</option>
+    						
+    					</select>
+                    </div>
+                </div>
+			</form>
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			  <button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+			
+			

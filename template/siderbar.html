@@ -1,0 +1,149 @@
+<div class="sidebar" >
+		<!-- 
+		<div class='spin-icon'>
+			<i class= "fa fa-hand-o-left">
+			</i>
+		</div>
+ 		-->
+        <dl class="nav_accordion " id="side-menu">
+        	<dd class="nav-header">
+        		<div class="dropdown header-logo">
+        			<span>
+        				<img src="/static/img/VADE-01.png">
+        			</span>					
+        		</div>
+        		<div class="dropdown header-logo-mini">
+        			<span>
+        				<img src="/static/img/logo-01.png">
+        			</span>
+        		</div>
+	 		</dd>
+        	<dd>
+        		<a href="/hl/dashboard" target="frame">
+	 				<i class="fa fa-dashboard"></i>
+	 				<span> 仪 表 盘 图 </span>
+	 			</a>
+	 		</dd>
+	 		
+	 		<dd>
+	 			<a>
+	 				<i class="fa fa-desktop" ></i>
+	 				<span> 系 统 管 理 </span>
+	 				<span class="fa arrow"></span>
+	 			</a>
+	 			<ul class="undisplay nav-second-level" >
+	 				<li>
+	                   <a class= "" href="/hl/config/sys_device" target="frame"><i class="fa fa-power-off"></i><span>设备管理</span></a>
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/sys_deviceparams" target="frame"><i class="fa fa-cogs"></i><span>系统参数</span></a>
+	 				</li>
+	 			
+	 				<li>
+	                   <a class="" href="/hl/config/sys_user" target="frame"><i class="fa fa-group"></i><span>用户管理</span></a>
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/sys_cert" target="frame"><i class="fa fa-archive"></i><span>证书管理</span></a>
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/sys_snmp" target="frame"><i class="fa fa-asterisk"></i><span>SNMP管理</span></a>
+	 				</li>
+	 			</ul>
+	 		</dd>
+	        <dd>
+          		<a>
+	          		<i class="fa fa-globe"></i>
+	          		<span> 网 络 管 理 </span>
+	          		<span class="fa arrow"></span>
+          		</a>
+                <ul class="undisplay nav-second-level">
+	 				<li>
+	                   	<a class="" href="/hl/config/net_port" target="frame"><i class="fa fa-usb"></i><span>端口管理</span></a>
+	 				</li>
+	 				<li>
+                   		<a class="" href="/hl/config/net_vlan" target="frame"><i class="fa fa-sliders"></i><span>VLAN管理</span></a>
+	 				</li>
+	 				<li>
+	                   	<a class="" href="/hl/config/net_nat" target="frame"><i class="fa fa-exchange"></i><span>NAT 管理</span></a>
+	 				</li>
+	 				<li>
+	                   	<a class="" href="/hl/config/net_arp" target="frame"><i class="fa fa-book"></i><span>ARP 管理</span></a>
+	 				</li>
+ 				    <li>
+	                   	<a class="" href="/hl/config/net_route" target="frame"><i class="fa fa-road"></i><span>路由管理</span></a>
+	 				</li>
+         		</ul>
+         	</dd>
+            <dd>
+            	<a>
+	            	<i class="fa  fa-sitemap"></i>
+	            	<span> 负 载 均 衡 </span>
+	            	<span class="fa arrow"></span>
+            	</a>
+               	<ul class="undisplay nav-second-level">
+   	                <li>
+   	                   <a class="" href="/hl/config/lb_vserver" target="frame"><i class="fa fa-tag"></i><span>虚拟服务器管理</span></a>
+   	                </li>
+	 				<li>
+	                   <a class="" href="/hl/config/lb_member" target="frame"><i class="fa fa-server"></i><span>成员管理</span></a> 
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/lb_pool" target="frame"><i class="fa fa-building"></i><span>应用池管理</span></a>
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/lb_healthcheck" target="frame"><i class="fa fa-check-circle"></i><span>健康检查管理</span></a>
+	 				</li>
+         		</ul>
+         	</dd>
+            <dd>
+            	<a>
+	            	<i class="fa fa-edit"></i>
+	            	<span> 策 略 管 理 </span>
+	            	<span class="fa arrow"></span>
+            	</a>
+               	<ul class="undisplay nav-second-level"> 
+   	                <li>
+   	                   <a class="" href="/hl/config/filter" target="frame"><i class="fa fa-file-archive-o"></i><span>请求过滤</span></a>
+   	                </li>
+	 				<li>
+	                   <a class="" href="/hl/config/policy_contentswitch" target="frame"><i class="fa fa-file-audio-o"></i><span>内容交换</span></a> 
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/policy_requestrewrite" target="frame"><i class="fa fa-file-word-o"></i><span>请求改写</span></a>
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/policy_headrewrite" target="frame"><i class="fa fa-file-zip-o"></i><span>响应头改写</span></a>
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/policy_contentrewrite" target="frame"><i class="fa fa-file-text"></i><span>响应内容改写</span></a>
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/policy_extention" target="frame"><i class="fa fa-file-pdf-o"></i><span>策略扩展</span></a>
+	 				</li>
+         		</ul>
+         	</dd>
+            <dd>
+            	<a>
+	            	<i class="fa  fa-wrench"></i>
+	            	<span> 诊 断 管 理 </span>
+	            	<span class="fa arrow"></span>
+            	</a>
+               	<ul class="undisplay nav-second-level">
+   	                <li>
+   	                   <a class="" href="/hl/config/log" target="frame"><i class="fa fa-lock" ></i><span>日志管理</span></a>
+   	                </li>
+	 				<li>
+	                   <a class="" href="/hl/config/warning" target="frame"><i class="fa fa-lock"></i><span>告警管理</span></a> 
+	 				</li>
+	 				<li>
+	                   <a class="" href="/hl/config/diagnosis" target="frame"><i class="fa fa-lock"></i><span>故障诊断管理</span></a> 
+	 				</li>
+         		</ul>
+         	</dd>
+         	<dd><a href="/hl/statistics" target="frame">
+	 				<i class="fa fa-industry"></i>
+	 				<span> 统 计 图 表</span>
+	 			</a>
+	 		</dd>
+        </dl>
+</div>

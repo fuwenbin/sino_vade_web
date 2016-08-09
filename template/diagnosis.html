@@ -1,0 +1,70 @@
+{% extends 'content_template.html'%}
+
+{% block content%}
+
+<div class="frame-content container-fluid">
+
+	<div class="page-header">
+	    <h2>告警管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">诊断管理</a></li>
+		  <li class="active"><strong>告警管理</strong></li>
+		</ol>
+	</div>
+	<div class="ibox container-fluid">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a data-toggle="tab">系统诊断命令</a>
+			</li>
+		</ul>
+		<div class="container-fluid mt15">
+			<form action="" method="POST" class="form-horizontal">
+				<div class="form-group col-md-3">
+	   				<label for="" class="col-md-2 h34 p0">命令:</label>
+	   				<div class="col-md-10">
+	   					<select class="form-control" id="" name="" required="required">
+	   						<option value="" selected="selected">ping</option>
+	   						<option value="">traceroute</option>
+	   						<option value="">tcpdump</option>
+	   						<option value="">netstat</option>
+	   						<option value="">iostat</option>
+	   						<option value="">pktdump</option>
+	   						<option value="">sar</option>
+	   					</select>
+	   				</div>
+	   			</div>
+	   			<div class="form-group col-md-3">
+		            <label for="" class="col-md-2 h34 p0">包数:</label>
+		            <div class="col-md-10">
+		                <input type="text" class="form-control" id="" value="3" />
+		            </div>
+		        </div>
+		        <div class="form-group col-md-3">
+		            <label for="" class="col-md-2 h34 p0">地址:</label>
+		            <div class="col-md-10">
+		                <input type="text" class="form-control" id="" value="" />
+		            </div>
+		        </div>
+		        <div class="col-md-3 p0">
+		        	<a type="button" href="diagnosis/exec" class="btn btn-default">执行命令</a>
+		            <a type="button" href="diagnosis/export" class="btn btn-default">导出结果</a>
+		        </div>
+			</form>
+		</div>
+	  	<div class="container-fluid p0">             
+	   		<a type="button" href="diagnosis/crashlog" class="btn btn-default">系统故障收集</a>
+	  	</div>
+		<ul class="nav nav-tabs mt15">
+			<li class="active">
+				<a data-toggle="tab">命令执行结果</a>
+			</li>
+		</ul>
+	</div>
+</div>
+{% end %}
+
+{% block script %}
+	<script src="/static/js/policy.js"></script>
+{% end %}

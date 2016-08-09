@@ -1,0 +1,52 @@
+
+<div class="modal fade" id="interface_statistics_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="modal-title">端口信息统计</h4>
+			</div>
+			<div class="modal-body">
+			 	<table id="interfaces" class="table table-hover table-bordered table-striped m0">
+				<thead>
+				
+					<tr>
+						<th>#</th>
+						<th>端口名称</th>												
+						<th>状态</th>																					
+						<th>Byte_In</th>	
+						<th>Byte_out</th>	
+						<th>Packets_In</th>	
+						<th>Packets_out</th>
+						<th>Error_In</th>
+						<th>Error_Out</th>
+						<th>MulticasstIn</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for index in range(len(statistics_datas))%}
+					<tr>
+						<td>{{index}} </td>
+						<td>{{statistics_datas[index]['name']}}</td>
+						<td>up</td>
+						<td>{{statistics_datas[index]['rx_pkts']}}</td>
+						<td>{{statistics_datas[index]['tx_pkts']}}</td>
+						<td>{{statistics_datas[index]['rx_bytes']}}</td>
+						<td>{{statistics_datas[index]['tx_bytes']}}</td>
+						<td>{{statistics_datas[index]['rx_err']}}</td>
+						<td>{{statistics_datas[index]['tx_err']}}</td>
+						<td>{{statistics_datas[index]['rx_mcast']}}</td>
+					</tr>
+				{% end %}
+				</tbody>
+			</table>
+			{% include '../_pagination.html' %}
+			</div>
+			<div class="modal-footer">
+			 	
+			</div>
+		</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+			
+			

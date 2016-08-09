@@ -1,0 +1,307 @@
+{% extends 'content_template.html'%}
+{% block content%}
+
+<div class="frame-content container-fluid">
+	<div class="page-header">
+	    <h2>设备管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">系统管理</a></li>
+		  <li class="active"><strong>设备管理</strong></li>
+		</ol>
+	</div>
+	
+	<div class="ibox container-fluid">
+		<ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active">
+		    	<a href="#sysinfo" aria-controls="sysinfo" role="tab" data-toggle="tab">系统信息</a>
+		    </li>
+		    <li role="presentation">
+		    	<a href="#softlicense" aria-controls="softlicense" role="tab" data-toggle="tab">软件许可</a>
+		    </li>
+		    <li role="presentation">
+		    	<a href="#sysupgrade" aria-controls="sysupgrade" role="tab" data-toggle="tab">系统升级</a>
+		    </li>
+			<li role="presentation">
+				<a href="#manageconsole" aria-controls="manageconsole" role="tab" data-toggle="tab">管理控制台</a>
+			</li>
+			<li role="presentation">
+				<a href="#configmanage" aria-controls="configmanage" role="tab" data-toggle="tab">配置管理</a>
+			</li>
+		</ul>
+		<div class="tab-content mt15">
+		 	<div class="tab-pane active" id="sysinfo">
+		 		<div class="container-fluid">
+			  		<form action="" method="POST" class="form-horizontal">
+						<div class="form-group">
+						    <label class="col-md-2">设备型号:</label>
+						    <label class="col-md-10">WiseGrid ADC4000</label>
+						</div>   
+						<div class="form-group">
+						    <label class="col-md-2">设备序列号:</label>
+						    <label class="col-md-10">WS10R4K4VW</label>
+						</div>  
+						<div class="form-group">
+						    <label class="col-md-2">系统版本:</label>
+						    <label class="col-md-10">P1_V4.1.11R_11070(正在运行)<a>补丁记录</a> </label>
+						</div>      
+						<div class="form-group">
+						    <label class="col-md-2">主机名称:</label>
+						    <label class="col-md-10">WiseGrid  </label>
+						</div>   
+						<div class="form-group">
+						    <label class="col-md-2">管理口地址:</label>
+						    <label class="col-md-10">192.168.4.235  </label>
+						</div>   
+						<div class="form-group">
+						    <label class="col-md-2">管理口掩码:</label>
+						    <label class="col-md-10">255.255.255.0  </label>
+						</div>   
+						<div class="form-group">
+						    <label class="col-md-2">主备模式:</label>
+						    <label class="col-md-10">单机  </label>
+						</div>    
+						<div class="form-group">
+						    <label class="col-md-2">系统时间:</label>
+						    <label class="col-md-10">2015-07-30 17:22:03 </label>
+						</div> 
+						<div class="form-group">
+			                  <div class="form-actions">
+			                      <a href="sysDeviceManage/reboot" type="button" class="btn btn-default "><i class="glyphicon glyphicon-ok"></i> 系统重启</a>
+			                      <a href="sysDeviceManage/shutdown" type="submit" class="btn btn-default "><i class="glyphicon glyphicon-remove"></i> 系统关机</a>
+			                      <a href="sysDeviceManage/versioncopy" type="submit" class="btn btn-default "><i class="glyphicon glyphicon-copy"></i> 版本复制</a>
+			                  </div>
+			            </div>
+					</form>
+				</div>
+		  	</div>
+		    <div class="tab-pane" id="softlicense">
+		    	<div class="container-fluid">
+					<form action="" method="POST" class="form-horizontal">   
+						<div class="form-group">
+				        	<label class="col-md-2">License发布时间:</label>
+				        	<label class="col-md-10">2015.7.20 </label>
+				        </div>    
+				    	<div class="form-group">
+				        	<label class="col-md-2">License类型:</label>
+				        	<label class="col-md-10">正式License</label>
+				    	</div>
+				    	<div class="form-group">
+				            <div class="form-actions">
+				                <a href="license/apply" type="button" class="btn btn-default ">申请License</a>
+				                <a href="license/install" type="submit" class="btn btn-default ">安装License</a>
+				            </div>
+				        </div>
+			     	</form>
+		    	</div>
+		    </div>
+			<div class="tab-pane" id="sysupgrade">
+				<div class="container-fluid">
+					<form action="" method="POST" class="form-horizontal">   
+						<div class="form-group">
+							<label class="col-md-12">您可以通过上传官方途径获取的软件升级包来更新您的系统。 </label>
+						</div> 
+						<div class="form-group">
+							<label for="file" class="col-md-2">升级安装包: </label>
+							<div class="col-md-10">
+								<input type="file" class="default" id="file" /> 
+							</div>                        
+						</div>
+						<div class="form-group">
+			                   <div class="form-actions">
+			                   	<button type="submit" class="btn btn-default ">上传</button>
+			                       <a href="system/rollback" type="submit" class="btn btn-default ">回退</a>
+			                   </div>
+			               </div>
+					</form>
+				</div>
+			</div>
+			<div class="tab-pane" id="manageconsole">
+				<div class="container-fluid">
+					<form action="" method="POST" class="form-horizontal">   
+						<div class="form-group">
+			      				<label for="type" class="col-md-2 h34">专用网管接口IP类型:</label>
+			      				<div class="col-md-10">	
+			      					<div class="radio">                       
+			                        <label>
+			                            <input type="radio" id="type" value="ipv4" name="type" checked="checked" />
+			                           	ipv4
+			                        </label>
+			                        <label>
+			                            <input type="radio" value="ipv6" name="type" />
+			                            ipv6
+			                        </label>
+								</div>	                	                   
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="address" class="col-md-2 h34">专用网管接口IP地址:</label>
+							<div class="col-md-10">
+								<div class="input-group w300">
+									<input type="text" class="form-control" id="address" name="address" value="" />
+									<span class="input-group-addon"><b>:</b></span>
+									<input type="text" class="form-control" id="port" name="port" value="" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="gateway-addr" class="col-md-2 h34">网管网段网关IP地址:</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control w300" id="gateway-addr" name="gateway-addr"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="webport" class="col-md-2 h34">WEB界面HTTPS访问端口:</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control w300" id="webport" name="webport" value="10443" />
+							</div>
+						</div>
+						<div class="form-group">
+			               	<label for="sshport" class="col-md-2 h34">SSH终端访问端口:</label>
+			                <div class="col-md-10">
+			                    <input type="text" class="form-control w300" id="sshport" name="sshport" value="22" />
+			                </div>
+			           	</div>
+						<div class="form-group">
+			               	<label for="timeout" class="col-md-2 h34">登录超时时间：</label>
+			                <div class="col-md-10">
+			                	<div class="input-group w300">
+							      	<input type="text" class="form-control" id="timeout" name="timeout" value="600" />
+							      	<span class="input-group-addon p0 b0">
+							      		<select class="h34" name="bandwidthUnit">
+							      			<option value="second">秒</option>
+							      			<option value="minute">分钟</option>
+							      			<option value="hour">小时</option>
+							      		</select>
+							      	</span>
+							    </div>
+			                </div>
+			           	</div> 
+						<div class="form-group">
+			                <label for="logintime" class="col-md-2 h34">登录尝试次数:</label>
+			                <div class="col-md-10">
+			                    <input type="text" class="form-control w300" id="logintime" name="logintime" value="3" />
+			                </div>
+			            </div>
+			           	<div class="form-group">
+			                <label for="locktime" class="col-md-2 h34">登录尝试失败锁定时间：</label>
+			                <div class="col-md-10">
+			                	<div class="input-group w300">
+							      	<input type="text" class="form-control" id="locktime" name="locktime" value="600" />
+							      	<span class="input-group-addon p0 b0">
+							      		<select class="h34" name="bandwidthUnit">
+							      			<option value="second">秒</option>
+							      			<option value="minute">分钟</option>
+							      			<option value="hour">小时</option>
+							      		</select>
+							      	</span>
+							    </div>
+			                </div>
+			            </div> 
+			           	<div class="form-group">
+							<label for="controllist" class="col-md-2 h34">客户端访问控制列表：</label>	
+							<div class="col-md-10">
+								<div class="input-group">
+									<div class="radio">	
+										<label>	
+											<input type="radio" id="controllist" name="controllist" value="" />启用白名单 	
+										</label>
+										<label>	
+											<input type="radio" name="controllist" value="" />启用黑名单 
+										</label>									
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+			                   <div class="form-actions">
+			                       <button type="submit" class="btn btn-default "><span class="glyphicon glyphicon-ok"></span> 保存</button>
+			                       <button type="button" class="btn btn-default "><span class="glyphicon glyphicon-remove"></span> 取消</button>
+			                       <button type="reset" class="btn btn-default "><span class="glyphicon glyphicon-cog"></span> 重置</button>
+			                   </div>
+			               </div>
+					</form>
+				</div>
+				<div class="mb15">
+					<ul class="nav nav-tabs">
+						<li class="active"><a>客户端访问控制列表</a></li>
+					</ul>
+				</div>
+				<div class="mb15">
+					<div class="btn-group">
+						<a class="btn btn-default " href="arp/add">增加 <span class="glyphicon glyphicon-plus"></span></a>
+						<a class="btn btn-default  action-delete" href="arp/delete">删除 <span class="glyphicon glyphicon-remove"></span></a>
+						<a class="btn btn-default " href="javascript:location.reload();">刷新 <span class="glyphicon glyphicon-refresh"></span></a>
+					</div>
+					<div class="pull-right dropdown">
+						<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							显示列
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="javascript:void(0);">
+									<label><input type="checkbox" checked="checked" column-data="1" />IP地址</label>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:void(0);">
+									<label><input type="checkbox" checked="checked" column-data="2" />网络掩码</label>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="mb15">
+					<table class="table table-hover table-bordered table-striped m0">
+						<thead>
+							<tr>
+								<th>
+									<div class="checkbox m0">
+										<label>
+											<input class="action-select" type="checkbox" value="" />
+										</label>
+									</div>
+								</th>
+								<th>IP地址</th>
+								<th>网络掩码</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="checkbox m0">
+										<label>
+											<input name="checked" type="checkbox" value="" />
+										</label>
+									</div>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane" id="configmanage">
+				<div class="container-fluid">
+					<form action="" method="POST" class="form-horizontal">
+						<div class="form-group">
+							<div class="form-actions">          
+			       				<a class="btn btn-default " type="button" href="sysconfig/export">配置导出</a> 	
+			       				<a class="btn btn-default " type="button" href="sysconfig/import">配置导入</a>	
+								<a class="btn btn-default " type="button" href="sysconfig/restore">恢复初始设置</a>							
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% end %}
+{% block script %}
+	<script src=""></script>
+{% end %}
+

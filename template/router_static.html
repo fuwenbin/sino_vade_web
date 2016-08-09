@@ -1,0 +1,81 @@
+{% extends 'content_template.html'%}
+{% block content%}
+<div class="frame-content container-fluid">
+	<div class="page-header">
+	    <h2>路由管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">网络管理</a></li>
+		  <li class="active">路由管理</li>
+		</ol>
+	</div>
+
+	<div class="ibox container-fluid">
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a data-toggle="tab">静态路由--详情</a>
+			</li>
+		</ul>
+		<div class="container-fluid mt15">
+			<form action="" method="POST" class="form-horizontal" role="form">
+				<div class="form-group">
+					<label for="type" class="col-md-2 control-label">选择类型:</label>
+					<div class="col-md-10">
+						<div class="radio">
+							<label>
+								<input type="radio" id="type" name="type" value="static" checked="checked" />静态
+							</label>
+							<label>
+								<input type="radio" name="type" value="gateway" />网关
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="ip_type" class="col-md-2 control-label">虚拟IP类型:</label>
+					<div class="col-md-10">
+						<div class="radio">
+							<label>
+								<input type="radio" id="ip_type" name="ip_type" value="ipv4" {if $route.enable|default:"ipv4" == "ipv4"} checked="checked"{/if} />IPv4
+							</label>
+							<label>
+								<input type="radio" name="ip_type" value="ipv6" {if $route.type == "ipv6"} checked="checked"{/if} />IPv6
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dest" class="col-md-2 control-label">目的地址:</label>
+					<div class="col-md-10">
+						<div class="input-group">
+							<input type="text" class="form-control" id="dest" name="dest" value="" />
+							<span class="input-group-addon"><b>/</b></span>
+							<input type="text" class="form-control" id="netmask" name="netmask" value="" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="gateway" class="col-md-2 control-label">网关:</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control " id="gateway" name="gateway" value="0.0.0.0" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nexthop" class="col-md-2 control-label">下一跳:</label>
+					<div class="col-md-10">
+						<input type="text" class="form-control " id="nexthop" name="nexthop" value="{$route.nexthop}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-actions">
+						<button type="submit" class="btn btn-default"><span class="fa fa-ok"></span> 保存</button>
+						<button type="button" class="btn btn-default"><span class="fa fa-remove"></span> 取消</button>
+						<button type="reset" class="btn btn-default"><span class="fa fa-cog"></span> 重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% end %}

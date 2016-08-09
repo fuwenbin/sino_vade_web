@@ -1,0 +1,22 @@
+{% extends 'base2.html' %}
+
+{% block style %}
+
+{% end %}
+{% block maincontent%}
+{% include 'siderbar.html'%}
+<div class="content_body">
+	{% include '_header3.html' %}
+     <div class="row">
+		<iframe class="" id="content-iframe" scrolling="no" marginheight="0"
+			 marginwidth="0" name="frame" frameborder="0"  onLoad="iFrameHeight()"
+			width="100%" src="/hl/dashboard">
+		</iframe>
+     </div>
+     
+    
+</div>
+{% end %}
+{% block script %}
+
+{% end %}

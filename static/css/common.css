@@ -1,0 +1,168 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+img {
+	border: 0;
+ 	vertical-align:middle;
+}
+a,a:focus,a:link,a:visited,a:hover{
+	text-decoration: none!important; 
+}
+
+h1,h2,h3,h4,h5,h6{
+	padding: 2px 0px;
+	margin: 2px 0px 8px 0px;
+	color: #777;
+}
+h2{
+	font-size: 25px;
+	line-height: 35px;
+}
+h3{
+	font-size: 18px;
+	line-height: 23px;
+}
+h4{
+	font-size: 15px;
+	line-height: 20px;
+}
+h5{
+	font-size: 13px;
+	line-height: 18px;
+}
+h6{
+	font-size: 12px;
+	line-height: 17px;
+}
+
+/* font */
+
+.f16 {
+	font-size: 16px;
+}
+
+/* margin */
+
+.m0 {
+	margin: 0px;
+}
+.mt15 {
+	margin-top: 15px;
+}
+.mb10 {
+	margin-bottom: 10px;
+}
+.mb15 {
+	margin-bottom: 15px;
+}
+.ml10 {
+	margin-left: 10px;
+}
+.ml15 {
+	margin-left: 15px;
+}
+.mr15 {
+	margin-right: 15px;
+}
+
+/* padding */
+.p0 {
+	padding: 0px !important;
+}
+.pt7{
+	padding-top:7px;
+}
+.pt15 {
+	padding-top: 15px;
+}
+
+.pb15 {
+	padding-bottom: 15px;
+}
+.pl170 {
+	padding-left: 170px;
+}
+
+/* border */
+.b0 {
+	border: 0px !important;
+}
+
+/* width & height */
+
+.wauto {
+	width: auto;
+}
+.w70 {
+	width: 70px;
+}
+.w100 {
+	width: 100px!important;
+}
+.w200{
+	width:200px;	
+}
+.w220 {
+	width: 220px;
+}
+.w234 {
+	width: 234px;
+}
+.w300 {
+	width: 300px;
+}
+.h34{
+	height:34px;
+	line-height:34px;	
+}
+.h200{
+	height:200px!important;
+}
+.h300{
+	height:300px!important;
+}
+
+
+.clear-border{
+	border:0px!important;
+}
+
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.row-of-icons {
+cursor: default;
+-webkit-user-select: none; /* Chrome all / Safari all */
+-moz-user-select: none; /* Firefox all */
+-ms-user-select: none; /* IE 10+ */</p> <p> /* No support for these yet, use at own risk */
+-o-user-select: none;
+user-select: none; 
+}
+.row-selected td{
+	background-color: #DCF4FF!important;
+	color:#333;
+	font-weight:600;
+}
+
+
+/* table 
+ */
+td:first-child,
+th:first-child{
+ 	width:1%;
+}
+ 
+.input-sm {
+    height: 30px;
+    padding: 3px 8px !important;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+ 

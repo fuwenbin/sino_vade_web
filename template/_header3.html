@@ -1,0 +1,107 @@
+<div class='topbar' style="text-align:center;">
+	<nav class="navbar fixbar" style="border:0px" role="navigation">
+		<div class="">
+			
+					
+			<div style="clear:both;"></div>
+		</div>
+		
+		<div class="menu">  
+		
+			<div class="brand">
+				<span>
+					<a class="menu-minimalize btn btn-primary">
+						<i class="fa fa-bars"></i>
+					</a>
+				</span>
+			</div>
+			<div class="dropdown version">
+				<a class="dropdown-toggle"  href="#" data-toggle="dropdown">
+					<span>WiseGrid vADE </span>
+					<span>V3.1.18R_3976</span>
+					<span class="caret">
+					</span>
+				</a> 
+			
+				<ul class="dropdown-menu animated fadeInRight" aria-labelledby="dLabel">
+			        <li>
+						<div class="dropdown-head"><h3>历史版本</h3></div>
+			        </li>
+			        <li>
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#version_modal">更新时间：[yyyy]-[mm]-[dd]-[hh]:[mm]:[ss]	WiseGrid-V4.1.10T_3976</button>		                  			
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#version_modal">更新时间：[yyyy]-[mm]-[dd]-[hh]:[mm]:[ss]	PATCH-WiseGrid-V4.1.10T_4503</button>			              			
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#version_modal">更新时间：[yyyy]-[mm]-[dd]-[hh]:[mm]:[ss]	T-PATCH-WiseGrid-V4.1.10T_4508</button>			              			
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#version_modal">更新时间：[yyyy]-[mm]-[dd]-[hh]:[mm]:[ss]	T-PATCH-WiseGrid-V4.1.10T_4509</button>			              			
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#version_modal">更新时间：[yyyy]-[mm]-[dd]-[hh]:[mm]:[ss]	T-PATCH-WiseGrid-V4.1.10T_4512</button>			              			
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#version_modal">更新时间：[yyyy]-[mm]-[dd]-[hh]:[mm]:[ss]	PATCH-WiseGrid-V4.1.10T_4513</button>			              			
+			        </li>	                                                          
+		        </ul>
+	        </div>
+			<ul class="nav user-info">
+				<li  class="dropdown">
+					<a href="#" class="btn dropdown-toggle" data-toggle="dropdown" >
+						<i class='fa fa-user'></i>
+						<span>admin</span>
+						<i class='fa fa-angle-down'></i>
+					</a>
+					
+					<ul class="dropdown-menu" aria-labelledby="dLabel">
+						<li><a>退出</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<div class="modal fade" id="version_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="myModalLabel">ReleaseNote</h3>
+			</div>
+			<div class="modal-body">
+				<p>软件版本：WiseGrid-3.1.18R-3976</p>
+				<p>MD5: [注，每个版本发出的时候要计算一个MD5的值，以便于校验]</p>
+				<p>综合描述：</p>                                
+				-----------------------------------------------------------
+				<p>FastLB-24-Vxx.xx</p>
+				<p>细节描述：</p>
+				<p>SmartLB-47-Vxx.xx </p> 
+				<p>细节描述：</p>
+				<p>GSLB-Vxx.xx</p>
+				<p>细节描述：</p>
+				<p>Deamon4-Vxx.xx </p>
+				<p>细节描述：</p>
+				<p>Keep_Alive-Vxx.xx</p>
+				<p>细节描述： </p>
+				<p>HA-Vxx.xx</p>
+				<p>细节描述：</p>
+				<p>Statistics-Vxx.xx</p>
+				<p>细节描述：</p>
+				<p>Publish_Module-Vxx.xx</p>
+				<p>细节描述：</p>
+				<p>OS-Vxx.xx</p>
+				<p>细节描述：</p>
+				<p>补丁程序需要有补丁程序的描述文件，补丁的描述文件以文本格式保存，文件名称：patch_release_note.txt. 其文件内部格式如下：</p>														
+				<p>补丁文件名：PATCH_V3.1.8R_9374.bin</p>
+				<p>MD5：7b0162900a055b2af8f8bccae5fc9362</p>
+				---------------------------------------------------------------------
+				<p>修正问题</p>
+				<p>-修正GSLB建立标准dns，相同域名，其中一条添加视图功能，修改未添加视图的A记录域名被删除问题。bug3733。</p>
+				<p>-  修正智能SNAT管理，web分页管理不可用。bug3728</p>
+				<p>-  修正LLB前台虚拟服务器添加超过21个虚拟服务器以后，无法继续添加虚拟服务器。bug3719</p>
+				<p>-  修正配置llb虚拟服务，选择拓扑信息决策算法、加权轮询算法，页面显示不正常。bug3718</p>
+				<p>-  修正GSLB基础视图的标准DNS功能不生效问题。bug3500</p>
+				<p>-  PATCH_V3.1.8R_9374-P2.bin包含PATCH_V3.1.8R_9016-P1.bin修复的问题。</p>
+				<p>修正程序</p>
+				<p>-  WEB页面、Daemon4. </p>                                
+				<p>升级方式</p>
+				<p>-  上传到系统root目录下，执行PATCH_V3.1.8R_9374.bin，重启系统。</p>																	
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

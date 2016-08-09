@@ -1,0 +1,74 @@
+{% extends 'content_template.html'%}
+{% block content%}
+
+<div class="frame-content container-fluid">
+	<div class="page-header">
+	    <h2>VLAN管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">网络管理</a></li>
+		  <li class="active"><strong>VLAN管理</strong></li>
+		</ol>
+	</div>
+	<div class="ibox container-fluid mb15">
+	
+		<div class="mb15">
+			<ul class="nav nav-tabs">
+				<li class="active"><a>VLAN列表</a></li>
+				
+			</ul>
+		</div>
+	
+		<div class="mb15">
+			<div class="btn-group">
+				<a class="btn btn-default" href="#" id="addbtn">增加 <span class="fa fa-plus"></span></a>
+				<a class="btn btn-default" href="#">删除 <span class="fa fa-remove"></span></a>
+				<a class="btn btn-default" href="#">修改 <span class="fa fa-edit"></span></a>
+				<a class="btn btn-default" href="javascript:location.reload();">刷新 <span class="fa fa-refresh"></span></a>
+			</div>
+		</div>
+		<div class="mb15">
+			<table id="vlan-table" class="row-of-icons table table-hover table-bordered table-striped m0">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>VLAN名称</th>												
+						<th>VLAN ID</th>																					
+						<th>VLAN接口成员</th>	
+						<th>VLAN IP</th>	
+					</tr>
+				</thead>
+				<tbody>
+					{% for index in range(len(vlans))%}
+						<tr>
+							<td>{{index}} </td>
+							<td class="vlan_name">{{vlans[index]['name']}}</td>
+							<td>{{vlans[index]['vlanid']}}</td>
+							<td>{% set interfaces = vlans[index]['interfaces'] %}
+								{% for interindex in range(len(interfaces)) %}
+									{{ interfaces[interindex]['interface']}},
+								{% end %}
+							</td>
+							<td>{% set ips = vlans[index]['ipaddrs'] %}
+								{% if len(ips)>0 %}
+									{{ ips[0]['ip']}}/{{ ips[0]['netmask']}}
+								{% end %}
+								<a class="vlan_ip_detail" href="#">详细</a>
+							</td>
+						</tr>
+					{% end %}
+				</tbody>
+			</table>
+			{% include '_pagination.html' %}
+		</div>
+	</div>
+</div>
+{% include 'modal/vlan_ip_modal.html' %}
+{% end %}
+
+
+{% block script %}
+	<script src="/static/js/vlan.js"></script>
+
+{% end %}

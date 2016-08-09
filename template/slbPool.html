@@ -1,0 +1,71 @@
+{% extends 'content_template.html'%}
+{% block content%}
+<div class="frame-content container-fluid">
+	<div class="page-header">
+	    <h2>应用池管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">负载均衡</a></li>
+		  <li class="active"><strong>应用池管理</strong></li>
+		</ol>
+	</div>
+	<div class="container-fluid">
+		<div class="mb15">
+			<ul class="nav nav-tabs">
+				<li class="active"><a>应用池列表</a></li>
+			</ul>
+		</div>
+		<div class="mb15">
+			<div class="btn-group">
+				<a class="btn btn-default" href="slbpool/add">增加<span class="fa fa-plus"></span></a>
+				<a class="btn btn-default action-delete" href="slbpool/delete">删除<span class="fa fa-remove"></span></a>
+				<a class="btn btn-default action-edit" href="slbpool/edit">修改<span class="fa fa-edit"></span></a>
+				<a class="btn btn-default" href="javascript:location.reload();">刷新<span class="fa fa-refresh"></span></a>
+			</div>
+			<div class="pull-right dropdown">
+				<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					显示列
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="1" />名称</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="2" />成员状态</label>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<label><input type="checkbox" checked="checked" column-data="3" />健康检测</label>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="mb15">
+			<table class="table table-hover table-bordered table-striped m0">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>名称</th>
+						<th>成员状态</th>
+						<th>健康检测</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+			{% include '_pagination.html' %}
+		</div>
+		
+	</div>
+</div>
+{% end %}

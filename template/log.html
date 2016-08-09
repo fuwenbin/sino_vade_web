@@ -1,0 +1,101 @@
+{% extends 'content_template.html'%}
+
+{% block content%}
+
+
+<div class="frame-content container-fluid">
+
+	<div class="page-header">
+	    <h2>日志管理</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">诊断管理</a></li>
+		  <li class="active"><strong>日志管理</strong></li>
+		</ol>
+	</div>
+	<div class="ibox container-fluid">
+		<div class="mb15">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="module/log">系统日志</a></li>
+				<li><a href="#">审计日志</a></li>
+				<li><a href="#">进程日志</a></li>
+				<li><a href="#">业务日志</a></li>
+				<li><a href="#">规则日志</a></li>
+				<li><a href="#">安全日志</a></li>
+			</ul>
+		</div>
+		
+		<div class="row form-horizontal">
+			<div class="form-group">
+			<label for="hostname" class="col-md-1 font-normal control-label">过滤条件选择:</label>
+			<div class="col-sm-1">
+				<select class="form-control input-sm" >
+               		<option>日志等级(所有)</option>
+               		<option>CRITICAL</option>
+               		<option>ERROR</option>
+               		<option>WARNING</option>
+               		<option>INFO</option>
+               		<option>ADMIN</option>
+               	</select>
+            </div>
+            <div  class="col-sm-2">
+				<select class="form-control input-sm">
+               		<option>所有事件</option>
+               		<option>License管理</option>
+               		<option>系统配置管理</option>
+               		<option>健康检查管理</option>
+               		<option>服务器负载均衡服务管理</option>
+               		<option>地理拓扑管理</option>
+               		<option>策略规则管理</option>
+               		<option>证书管理</option>
+               		<option>SNMP管理</option>
+               		<option>端口管理</option>
+               		<option>VLAN管理</option>
+               		<option>路由管理</option>
+               		<option>SNAT管理</option>
+               		<option>ARP管理</option>
+               		<option>诊断管理</option>
+               		<option>认证管理</option>
+               		<option>登入登出管理</option>
+               		<option>DNAT管理</option>
+               	</select>
+            </div>
+	            <div  class="col-sm-2">
+	            	<div class="input-group">
+						<input type="text" class = "form-control input-sm" placeholder="搜索" >
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-sm btn-primary">确定</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt15">
+			<table class="table table-hover table-bordered table-striped p0">
+				<thead>
+					<tr>
+						<th style="display: none;"></th>
+						<th>时间</th>						
+						<th>事件类型</th>							
+						<th>详情</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="display: none;"></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			{% include '_pagination.html' %}
+		</div>
+	</div>
+</div>
+{% end %}
+
+{% block script %}
+	<script src="/static/js/policy.js"></script>
+{% end %}

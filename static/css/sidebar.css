@@ -1,0 +1,223 @@
+
+/* sidebar */
+.sidebar{
+	position:relative;
+	background-color: #2f4050;
+	/*background-color:#DAE9F7;*/
+    height:100%;
+    width:200px;
+    vertical-align:top;
+    display: table-cell;
+    -webkit-box-shadow: -1px 3px 6px -2px #c7c7c7 inset,1px 0 0 0 #c7c7c7 inset;
+    transition: all 0.3s ease 0s;
+    box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.34), 0 0 6px 0 rgba(0, 0, 0, 0.14);
+}
+
+.sidebar .nav-header{
+	padding: 50px 0px;
+	background:url("/static/img/header-profile.png") no-repeat;
+	text-align:center
+}
+.nav-header .header-logo img{
+	width:174px;
+	height:54px;
+}
+.header-logo-mini{
+	display:none;
+}
+.mini-navbar .nav-header .header-logo{
+	display:none;
+}
+.mini-navbar .nav-header .header-logo-mini{
+	display:block;
+}
+
+
+.nav-header,.nav-header a{
+	color:#a7b1c2 !important;
+}
+
+.sidebar dd>a,
+.sidebar dd li>a,
+.nav_accordion dd{
+	color:#a7b1c2;
+}
+.sidebar dd>a .arrow {
+	margin-right:5px;
+    line-height: 1.42857;
+    float:right;
+}
+.sidebar .fa.arrow:before{
+	content: "\f104";
+}
+.sidebar dd.active a .fa.arrow:before{
+	content: "\f107";
+	
+}
+
+.spin-icon {
+    background: #3593E6;
+    position: absolute;
+    padding: 4px 5px 3px 3px;
+    border-radius: 0 15px 15px 0;
+    font-size: 16px;
+    top:10px;
+    right: -24px;
+    width: 24px;
+    height:28px;
+    color: #fff;
+    z-index:119;
+    cursor: pointer;
+}
+.fa-spin {
+     -webkit-animation: fa-spin 2s infinite linear; 
+     animation: fa-spin 2s infinite linear; 
+}
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+.nav_accordion{
+	top:0px;
+}
+
+.nav_accordion dd:hover{
+	cursor: pointer;
+}
+
+.nav_accordion dd>a {
+    padding: 18px 8px 12px 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size:14px;
+    display:block;
+    transition: all 0.3s ease 0s;
+}
+.nav_accordion dd:hover,
+.nav_accordion dd:focus ,
+.nav_accordion dd.active,
+.nav-second-level li:hover{
+	background-color:#293846;
+    color:#fff;
+}
+.nav_accordion dd:hover>a,
+.nav_accordion dd:focus>a,
+.nav_accordion dd.active>a,
+.nav-second-level li:hover a,
+.nav_accordion li.active a{
+    color:#fff;
+}
+
+.nav_accordion dd a>span{
+    margin-left:5px;
+}
+
+.nav_accordion dd ul {
+	list-style: none outside none;
+	padding:0px;
+}
+.nav_accordion dd li{
+    width:100%;
+}
+
+.nav-second-level{
+	margin:0px 0 0px 0;
+}
+.nav-second-level li a{
+    padding: 10px 10px 12px 50px;
+    outline: none;
+    display:block;
+    text-decoration: none;
+    text-align: left;
+}
+
+
+.fa{
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0, 0);
+}
+.pull-right {
+    float: right !important;
+}
+
+/* Half column */
+
+.mcol-left{
+	width: 48%;
+	float: left;
+}
+.mcol-right{
+	width: 48%;
+	float: right;
+}
+
+
+
+
+/* mini-navbar */
+
+.mini-navbar {
+	width:60px;
+}
+.mini-navbar .nav-second-level,
+.mini-navbar .header-content,
+.mini-navbar dd>a span {
+    display: none;
+}
+.mini-navbar dd>a {
+    font-size: 16px;
+}
+.mini-navbar dd:hover{
+	position:relative;
+}
+.mini-navbar dd:hover .nav-second-level {
+	display:block!important;
+    position: absolute;
+    left: 60px;
+    top:0px;
+    width:160px;
+    z-index:2000;
+    padding: 8px 8px 8px 8px;
+    background-color:#293846;
+}
+.mini-navbar dd:hover .nav-second-level li a{
+	padding: 12px 10px 7px 20px;
+}
+.mini-navbar dd>a {
+    padding: 16px 20px 16px 20px;
+    cursor: pointer;
+    font-size:19px;
+    transition: all 0.3s ease 0s;
+}
+
+.mini-navbar dd>a .arrow {
+    line-height: none;
+}
+
+.mini-navbar dd:hover + dd.nav-second-level  {
+    display: block;
+    border-radius: 0 2px 2px 0;
+    min-width: 140px;
+    height: auto;
+}

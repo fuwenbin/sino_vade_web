@@ -1,0 +1,191 @@
+{% extends 'content_template.html'%}
+{% block content%}
+<div class="frame-content container-fluid">
+	<div class="page-header">
+	    <h2>系统参数</h2>
+	
+		<ol class="breadcrumb">
+		  <li><a href="/hl/dashboard">首页</a></li>
+		  <li><a href="#">系统管理</a></li>
+		  <li class="active"><strong>系统参数</strong></li>
+		</ol>
+	</div>
+	<div class="ibox container-fluid">
+		<ul class="nav nav-tabs tab_menu" role="tablist">
+		    <li role="presentation" class="active">
+		    	<a href="#basic-configuration" aria-controls="basic-configuration" role="tab" data-toggle="tab">基本配置</a>
+		    </li>
+		    <li role="presentation">
+		    	<a href="#advanced-configuration" aria-controls="advanced-configuration" role="tab" data-toggle="tab">高级配置</a>
+		    </li>
+		</ul>
+	    <div class="tab-content mt15">
+	        <div class="tab-pane active" id="basic-configuration" role="tabpanel">
+	        	<div class="container-fluid">
+		            <form action="" id="sysconfig" method="POST" class="form-horizontal" role="form">
+		            	<h4>主机名称</h4>
+		            	<div class="form-group">
+		                    <label for="hostname" class="col-md-1 control-label">主机名称:</label>
+		                    <div class="col-md-4">
+		                        <input type="text" class="form-control" id="hostname" name="hostname" value="WiseGrid" />
+		                    </div>
+		                </div>
+		                <hr />
+		                <div class="h34 f16">日期与时间</div>
+		                <div class="form-group">
+		                    <label for="date" class="col-md-1 control-label" size="4">当前日期:</label>
+		                    <div class="col-md-4">
+		                        <div class="controls">
+		                        	<input type="text" class="form-control date-picker" id="date" name="date" value="" />                
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="time" class="col-md-1 control-label">当前时间:</label>
+		                    <div class="col-md-4">
+		                    	<div class="controls">
+		                        	<div class="bootstrap-timepicker-component">
+		                        		<input type="text" class="form-control timepicker-24" id="time" name="time" />
+		                            </div>
+		                    	</div>
+		                    </div>
+		                </div>
+		                <hr />
+		                <h4>网络时间同步</h4>
+		                <div class="form-group">
+		                    <label for="network-sync" class="col-md-1 control-label">是否开启:</label>
+		                    <div class="col-md-4">
+		                        <div class="radio">
+		                            <label class="col-md-6">
+		                                <input type="radio"  name="network-sync" value="on" />
+		                               	 是
+		                            </label>
+		                            <label class="col-md-6">
+		                                <input type="radio" name="network-sync" value="off" checked="checked" />
+		                               	 否
+		                            </label>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="server-addr" class="col-md-1 control-label">服务器地址:</label>
+		                    <div class="col-md-4">
+		                        <input class="form-control " id="server-addr" type="text" name="server-addr" />
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="period" class="col-md-1 control-label">同步周期：</label>
+		                    <div class="col-md-4">
+		                    	<div class="input-group">
+							      	<input type="text" class="form-control" id="period" name="period" value="" />
+							      	<span class="input-group-addon p0 b0">
+							      		<select class="h34" name="periodUnit">
+							      			<option value="">分钟</option>
+							      			<option value="">时</option>
+							      			<option value="">天</option>
+							      			<option value="">月</option>
+							      		</select>
+							      	</span>
+							    </div>
+		                    </div>
+		               	</div>
+		               	<hr />
+		                <h4>DNS配置管理</h4>
+		                <div class="form-group">
+		                    <label for="firstdns" class="col-md-1 control-label">首选DNS服务器:</label>
+		                    <div class="col-md-4">
+		                        <input type="text" class="form-control" id="firstdns" name="firstdns" value="202.106.0.20" />
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="backdns" class="col-md-1 control-label">备选DNS服务器:</label>
+		                    <div class="col-md-4">
+		                        <input type="text" class="form-control w300" id="backdns" name="backdns" value="2008::2013" />
+		                    </div>
+		                </div>
+		                <hr />       	 
+		                <div class="form-group">
+		                    <div class="form-actions">
+		                        <button type="button" class="btn btn-primary"><span class="fa fa-ok"></span>保存</button>
+		                        <button type="button" class="btn btn-default"><span class="fa fa-remove"></span>取消</button>
+		                        <button type="reset" class="btn btn-default"><span class="fa fa-cog"></span>重置</button>
+		                    </div>
+		                </div>
+		            </form>
+	            </div>
+	        </div>
+	        <div role="tabpanel" class="tab-pane" id="advanced-configuration">
+	        	<div class="container-fluid">
+		        	<form action="" method="POST" class="form-horizontal" role="form">
+		                <h4>数据转发控制</h4>
+		                <div class="form-group">
+		                    <label for="datacontrol" class="col-md-2 control-label">FORWARD:</label>
+		                    <div class="col-md-10">
+		                        <div class="radio">
+		                            <label class="col-md-6">
+		                                <input type="radio" id="datacontrol" name="datacontrol" value="on" checked="checked" />
+		                               	 是
+		                            </label>
+		                            <label class="col-md-6">
+		                                <input type="radio" name="datacontrol" value="off" />
+		                               	 否
+		                            </label>
+		                        </div>
+		                    </div>
+		                </div>
+		                <hr />
+		                <h4>会话连接超时参数</h4>
+		                <div class="form-group">
+			                <label for="rst" class="col-md-2 control-label">TCP_RST(秒):</label>
+			                <div class="col-md-10">
+			                    <input type="text" class="form-control" id="rst" name="rst" value="5" />
+			                </div>												
+		                </div>
+		                <div class="form-group">
+		                	<label for="syn" class="col-md-2 control-label">TCP_SYN(秒):</label>
+			                <div class="col-md-10">
+			                    <input type="text" class="form-control" id="syn" name="syn" value="120" />
+			                </div>
+		                </div>
+		                <div class="form-group">
+		                	<label for="established" class="col-md-2 control-label">TCP_ESTABLISHED(秒):</label>
+		                    <div class="col-md-10">
+		                        <input type="text" class="form-control" id="established" name="established" value="900"/>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                	<label for="fin" class="col-md-2 control-label">TCP_FIN(秒):</label>
+		                    <div class="col-md-10">
+		                        <input type="text" class="form-control" id="fin" name="fin" value="10" />
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                	<label for="icmp" class="col-md-2 control-label">ICMP(秒):</label>
+		                    <div class="col-md-10">
+		                        <input type="text" class="form-control" id="icmp" name="icmp" value="600" />
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                	<label for="udp" class="col-md-2 control-label">UDP(秒):</label>
+		                    <div class="col-md-10">
+		                        <input type="text" class="form-control" id="udp" name="udp" value="5" />
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <div class="form-actions">
+		                        <a href="sysconfig/save" type="submit" class="btn btn-default"><span class="fa fa-ok"></span>保存</a>
+		                        <button type="button" class="btn btn-default"><span class="fa fa-remove"></span>取消</button>
+		                        <button type="reset" class="btn btn-default"><span class="fa fa-cog"></span>重置</button>
+		                    </div>
+		                </div>
+					</form>
+				</div>
+	        </div>
+	    </div>
+    </div>
+</div>
+{% end %}
+
+{% block script %}
+	<script src="/static/js/sysconfig.js"></script>
+{% end %}

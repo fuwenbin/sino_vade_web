@@ -1,0 +1,149 @@
+
+#svgContainer{
+    cursor: -webkit-grab;
+    width:100%;
+}
+.node {
+    cursor: pointer;
+}
+
+.node.fixed {
+    fill: #C0C0C0;
+}
+
+.node text {
+    font-size: 14px;
+}
+
+.link {
+    stroke: #090909;
+    stroke-opacity: .6;
+    stroke-width: 2px;
+}
+
+.port circle {
+    stroke: black;
+    fill: #C5F9F9;
+}
+
+.port text {
+    font-size: 5px;
+}
+
+.topologyBalloon {
+    display: none;
+    background: #fff;
+    -webkit-box-shadow: 0px 1px 6px #777;
+    box-shadow: 0px 1px 6px #777;
+    position: absolute;
+    left: 100px;
+    top: 20px;
+    z-index: 500;
+    border-radius: 5px;
+    color: #333;
+    min-width: 200px;
+    line-height: 1.2;
+    font-size: 11px;
+}
+.topologyBalloon .contenBody{
+    padding: 8px 8px 0;
+}
+.topologyBalloon table.detailInfoTable {
+    margin-bottom: 5px;
+}
+.topologyBalloon .closeTopologyBalloon {
+    font-size: 16px;
+    line-height: 1;
+    display: block;
+    position: absolute;
+    font-weight: bold;
+    right: 6px;
+    top: 0px;
+    cursor: pointer;
+    padding: 3px;
+    color: #aaa;
+}
+.topologyBalloon .portTableHeader {
+    border-top: 1px solid #eee;
+    padding-top: 5px;
+    margin: 5px 0;
+    display: table;
+    width: 100%;
+}
+.topologyBalloon table.detailInfoTable td {
+    padding-right: 5px;
+    white-space: nowrap;
+}
+.topologyBalloon .portTableHeader .title {
+    display: table-cell;
+    font-size: 13px;
+    font-weight: bold;
+}
+.topologyBalloon table.detailInfoTable th, .topologyBalloon table.detailInfoTable td {
+    text-align: left;
+    vertical-align: middle;
+    padding-bottom: 3px;
+    background: transparent;
+}
+
+.topologyBalloon .footer{
+    background: #efefef;
+    border-top: 1px solid #dddddd;
+    padding: 8px;
+    border-radius: 0px 0px 7px 7px;
+}
+.topologyBalloon:after {
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 8px solid #fff;
+    display: block;
+    position: absolute;
+    top: 31px;
+    left: -8px;
+    width: 0;
+    height: 0;
+    content: "";
+}
+#b1topology{
+    z-index: 100;
+    left: 100px;
+    background: #fff;
+    top: 20px;
+    border-radius: 5px;
+     -webkit-box-shadow: 0px 1px 6px #777;
+    box-shadow: 0px 1px 6px #777;
+}
+.closeballoon {
+    font-size: 16px;
+    line-height: 1;
+    display: block;
+    position: absolute;
+    font-weight: bold;
+    right: 6px;
+    top: 0px;
+    cursor: pointer;
+    padding: 3px;
+    color: #aaa;
+}
+.topologyBalloon .contentBody{
+    padding: 8px 8px 0;
+}
+.topologyNavi{
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.layer-2{
+    display:none;
+}
+.topologyNavi .launchButtons{
+    float: right;
+    text-align: right;
+}
+/*.transparent_half {*/
+      /*filter:alpha(opacity=80);*/
+      /*-moz-opacity:0.8;*/
+      /*-khtml-opacity: 0.8;*/
+      /*opacity: 0.8;*/
+/*}*/
+

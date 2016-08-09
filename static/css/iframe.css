@@ -1,0 +1,77 @@
+body{
+	height:100%;
+	margin:0px ;
+	padding:0px;
+	font-size:13px!important;
+	overflow-x: hidden;  
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	transition-property: all;
+	transition-duration: 0.4s;
+	transition-timing-function: initial;
+	transition-delay: initial;
+	color: #676a6c!important;
+	font-family:微软雅黑,宋体!important;   
+}
+.i-light-blue{
+	background-color:#EEF5F7;
+}
+
+.ibox{
+	box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.34), 0 0 6px 0 rgba(0, 0, 0, 0.14);
+}
+.frame-content{
+	background-color:#EEF5F7;
+}
+
+.frame-content .page-header,.frame-content .container-fluid{
+	background-color:#fff;
+}
+.frame-content>.container-fluid{
+	padding-top:15px;
+	padding-bottom:15px;
+	margin:25px;
+}
+.page-header {
+    margin: 0 0 5px 0 !important;
+    padding: 10px 0px 5px 20px;
+    border-bottom: 0!important;
+    height: auto;
+    width: 100%;
+    box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.34), 0 0 6px 0 rgba(0, 0, 0, 0.14);
+}
+
+.page-header .breadcrumb{
+	margin-bottom:5px !important;
+	background-color: #ffffff !important;
+    padding: 0;
+    margin-bottom: 0;
+}
+.breadcrumb > li a {
+    color: inherit;
+}
+
+.breadcrumb > li.active a {
+    font-weight: 700;
+}
+
+
+.btn{
+	font-size:12px!important;
+}
+
+
+.nav>li>a {
+	padding:0.5em 1.2em!important;
+}
+
+.table-pagination nav{
+	float:right;
+}
+
+.table-pagination .pagination{
+	margin-top:5px;
+	margin-bottom:5px;
+}

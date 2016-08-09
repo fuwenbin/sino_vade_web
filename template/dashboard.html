@@ -1,0 +1,352 @@
+{% extends 'content_template.html' %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="/static/css/dashboard.css"/>
+{% end %}
+<!-- Main content starts -->
+{% block content%}
+<div class="i-light-blue chart-content container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+        	<div class="col-md-12">
+	        	<div class="panel panel-default">
+	        	   <div class="panel-heading">cpu 使用情况</div>
+	       	       <div class="panel-body">
+			        	<div class="col-md-3">
+			        		<div id="cpu1-flow-chart" class="chart-resize" style="height:282px;">
+							</div>		
+						</div>
+						<div class="col-md-9">
+							<div id="cpu2-flow-chart" class="chart-resize" style="height:282px;">
+							</div>		
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="row">
+        	<div class="col-md-12">
+	        	<div class="panel panel-default">
+	        	   <div class="panel-heading">内存使用情况</div>
+	       	       <div class="panel-body">
+			        	<div class="col-md-3">
+			        		<div id="storage1-flow-chart" class="chart-resize" style="height:282px;">
+							</div>		
+						</div>
+						<div class="col-md-9">
+							<div id="storage2-flow-chart" class="chart-resize" style="height:282px;">
+							</div>		
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="row">
+			<div class="col-md-6">
+		    	<div class="panel panel-default">
+					<div class="panel-heading">连接统计</div>
+					<!--BEGIN TABS-->
+					<div class="panal-body tabbable tabbable-custom">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab_2_1" data-toggle="tab">TCP并发</a></li>
+							<li><a href="#tab_2_2" data-toggle="tab">TCP新建</a></li>
+							<li><a href="#tab_2_3" data-toggle="tab">SSL并发</a></li>
+							<li><a href="#tab_2_4" data-toggle="tab">SSL新建</a></li>
+							<li><a href="#tab_2_5" data-toggle="tab">Http请求速率</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_2_1">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   										</select>
+									<div id="tcp-concurrency-chart" class="chart-resize" style="height:282px;"></div>																	
+								</div>	
+							</div>
+							<div class="tab-pane" id="tab_2_2">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   										</select>
+									<div id="tcp-new-chart" class="chart-resize" style="height:282px;"></div>																	
+								</div>	
+							</div>
+							<div class="tab-pane" id="tab_2_3">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   										</select>
+									<div id="ssl-concurrency-chart" class="chart-resize" style="height:282px;"></div>																	
+								</div>	
+							</div>
+							<div class="tab-pane" id="tab_2_4">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   										</select>
+									<div id="ssl-new-chart" class="chart-resize" style="height:282px;"></div>																	
+									
+								</div>	
+							</div>
+							<div class="tab-pane" id="tab_2_5">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   										</select>
+									<div id="http-request-chart" class="chart-resize" style="height:282px;"></div>																	
+								</div>	
+							</div>
+						</div>
+					</div>
+					<!--END TABS-->
+				</div>
+			</div>	          
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">流量吞吐统计</div>
+					<!--BEGIN TABS-->
+					<div class="tabbable tabbable-custom">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab_3_1" data-toggle="tab">系统吞吐</a></li>
+							<li><a href="#tab_3_2" data-toggle="tab">ss吞吐</a></li>
+							<li><a href="#tab_3_3" data-toggle="tab">接口流量吞吐</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_3_1">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   								</select>
+									<div id="sys-flow-chart" class="chart-resize" style="height:282px;"></div>																	
+									
+								</div>	
+							</div>
+							<div class="tab-pane" id="tab_3_2">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   								</select>
+									<div id="ssl-flow-chart" class="chart-resize" style="height:282px;"></div>																	
+									
+								</div>	
+							</div>
+							<div class="tab-pane" id="tab_3_3">
+								<div class="widget ">	
+									<select name="" id="input" class="form-control" required="required">
+		        						<option value="">test-RS1</option>
+		        						<option value="">test-RS2</option>
+		        						<option value="">test-RS3</option>
+		        						<option value="">test-RS4</option>
+		        						<option value="">test-RS5</option>
+	   								</select>
+									<div id="interface-flow-chart" class="chart-resize" style="height:282px;"></div>																	
+									
+								</div>	
+							</div>
+						</div>
+					</div>
+					<!--END TABS-->
+				</div>
+			</div>
+		</div>
+		<div class="row">		          
+			<div class="col-md-6">
+				<div class="portlet paddingless">						
+					<div class="portlet-body">
+						<!--BEGIN TABS-->
+						<div class="tabbable tabbable-custom">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#tab_3_1" data-toggle="tab">DNS查询速率</a></li>
+								<li><a href="#tab_3_2" data-toggle="tab">标准DNS查询速率</a></li>
+								<li><a href="#tab_3_3" data-toggle="tab">智能DNS查询速率</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab_3_1">
+									<div class="widget dark-blue">	
+										<select name="" id="input" class="form-control" required="required">
+			        						<option value="">test-RS1</option>
+			        						<option value="">test-RS2</option>
+			        						<option value="">test-RS3</option>
+			        						<option value="">test-RS4</option>
+			        						<option value="">test-RS5</option>
+     										</select>
+										<div id="dns-query-chart" class="chart-resize" style="height:282px;"></div>	
+									</div>																
+								</div>
+								<div class="tab-pane" id="tab_3_2">
+									<div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">											
+									</div>
+								</div>
+								<div class="tab-pane" id="tab_3_3">
+									<div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">											
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--END TABS-->
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="portlet box blue scrol">
+					<div class="portlet-title ">
+						<div class="caption"><i class="icon-calendar"></i>Server Stats</div>
+						<div class="tools">
+							<a href="" class="collapse"></a>
+							<a href="#portlet-config" data-toggle="modal" class="config"></a>
+							<a href="" class="reload"></a>
+							<a href="" class="remove"></a>
+						</div>
+					</div>
+					<div class="portlet-body">
+						<table class="table table-bordered table-hover">			
+							<thead>			
+								<tr>			
+									<th>#</th>			
+									<th>Date</th>			
+									<th>UserName</th>			
+									<th class="hidden-480">Servrity Level</th>			
+									<th>Event</th>
+									<th>Detail</th>			
+								</tr>			
+							</thead>			
+							<tbody>			
+								<tr>			
+									<td>1</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>license操作</td>
+									<td>上传license文件成功</td>			
+								</tr>			
+								<tr>			
+									<td>2</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>system</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>license操作</td>
+									<td> 安装license文件成功</td>			
+								</tr>			
+								<tr>			
+									<td>3</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-warning">WARNING</span></td>			
+									<td>license操作</td>
+									<td> 上传license文件失败</td>
+								</tr>			
+								<tr>			
+									<td>4</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>SLB虚拟服务器配置</td>
+									<td> 添加虚拟服务器【test11111】</td>			
+								</tr>			
+								<tr>			
+									<td>5</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>license操作</td>
+									<td>上传license文件成功</td>			
+								</tr>			
+								<tr>			
+									<td>6</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>system</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>license操作</td>
+									<td> 安装license文件成功</td>			
+								</tr>			
+								<tr>			
+									<td>7</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-warning">WARNING</span></td>			
+									<td>license操作</td>
+									<td> 上传license文件失败</td>
+								</tr>			
+								<tr>			
+									<td>8</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>SLB虚拟服务器配置</td>
+									<td> 添加虚拟服务器【test11111】</td>			
+								</tr>	
+								<tr>			
+									<td>9</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>system</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>license操作</td>
+									<td> 安装license文件成功</td>			
+								</tr>			
+								<tr>			
+									<td>10</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-warning">WARNING</span></td>			
+									<td>license操作</td>
+									<td> 上传license文件失败</td>
+								</tr>			
+								<tr>			
+									<td>11</td>			
+									<td>2015-05-19 03:06:01</td>			
+									<td>admin</td>			
+									<td class="hidden-480"><span class="label label-success">INFO</span></td>			
+									<td>SLB虚拟服务器配置</td>
+									<td> 添加虚拟服务器【test11111】</td>			
+								</tr>											
+							</tbody>			
+						</table>						
+					</div>
+				</div>
+			</div>
+		</div> 	
+	</div>
+</div>
+{% end %}
+<!-- Main content end -->
+{% block script %}
+<script src="/static/js/jquery.knob.modified.js"></script>
+<script src="/static/js/echarts.js"></script>
+
+<script src="/static/echarts/theme/macarons.js"></script>
+<script src="/static/js/dashboard-charts.js"></script>
+
+
+<script src="/static/js/jquery.flot.js"></script>
+<script src="/static/js/highcharts/js/highcharts.js"></script>
+<script src="/static/js/highcharts/js/themes/default.js"></script>
+<script src="/static/js/index.js"></script>
+<script src="/static/js/line-chart.js"></script>
+{% end %}

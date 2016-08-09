@@ -1,0 +1,95 @@
+
+html,body{
+   margin:0px ;
+   padding:0px;
+   background-color: #2f4050;
+   font-size:13px!important;
+   height: 100%; 
+   overflow-x: hidden;  
+   -webkit-transition: all 0.4s;
+   -moz-transition: all 0.4s;
+   -o-transition: all 0.4s;
+   transition: all 0.4s;
+   transition-property: all;
+   transition-duration: 0.4s;
+   transition-timing-function: initial;
+   transition-delay: initial;
+   font-family:微软雅黑,宋体;
+}
+
+
+.transparent_class {  
+    background: rgba(255, 0, 0, 0.3) !important; /* IE无效，FF有效 */    
+    filter: alpha(opacity=80);    
+    -moz-opacity:0.8;    
+    -khtml-opacity: 0.3;    
+    opacity: 0.8;    
+}  
+.transparent_class1{
+	background-color:rgba(0,0,0,0.1);
+}
+
+.undisplay{
+	display:none;
+}
+
+
+#main_content{
+   display:table;
+   height:100%;
+   min-width: 100%;
+}
+
+.content_body{
+    display: table-cell;
+    vertical-align:top;
+    background:#EEF5F7 !important;
+}
+.nav{
+	padding-left: 0px!important;
+}
+
+#loading-level{
+	z-index:1051;
+}
+#loading-level .modal-dialog{
+	width:160px;
+	margin:100px auto;
+}
+#loading-level .modal-body{
+	text-align:center;
+}
+.loading{
+	height:120px;
+}
+.loading img{
+	widht:100px;
+	height:100px;
+}
+label.error{
+	display:block;
+}
+
+.fildset-set  legend{
+	margin-bottom: 10px;
+	font-size:13px;
+}
+
+
+/* Dropdown menu */
+
+.table-layout{
+	position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.table-layout-cell{
+	position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+
