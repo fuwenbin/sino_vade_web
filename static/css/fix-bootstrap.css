@@ -98,11 +98,21 @@
 .table-select{
 	font-size:12px;
 }
-
+.text-danger{
+	color:#a94442!important;
+}
 .table-select table{
 	max-height:200px;
 }
 
+#add_vlan_ip_modal .modal-body .wizard .content{
+	overflow-y:auto;
+}
 
+.toast-top-margin{
+	  top: 30px;;
+	  right: 0;
+	  width: 100%;
+}
 
 

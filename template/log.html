@@ -29,7 +29,7 @@
 		<div class="row form-horizontal">
 			<div class="form-group">
 			<label for="hostname" class="col-md-1 font-normal control-label">过滤条件选择:</label>
-			<div class="col-sm-1">
+			<div class="col-sm-2">
 				<select class="form-control input-sm" >
                		<option>日志等级(所有)</option>
                		<option>CRITICAL</option>
@@ -61,14 +61,21 @@
                		<option>DNAT管理</option>
                	</select>
             </div>
-	            <div  class="col-sm-2">
-	            	<div class="input-group">
-						<input type="text" class = "form-control input-sm" placeholder="搜索" >
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-sm btn-primary">确定</button>
-						</span>
-					</div>
+            <div class="col-sm-4" id="date_picker">
+                <div class="input-daterange input-group" >
+                    <input type="text" id="from" class="input-sm form-control" name="start" value="{{now}}"/>
+                    <span class="input-group-addon">to</span>
+                    <input type="text" id="to" class="input-sm form-control" name="over" value="{{now}}" />
+                </div>
+            </div>
+            <div  class="col-sm-2">
+            	<div class="input-group">
+					<input type="text" class = "form-control input-sm" placeholder="是否有搜索的关键字" >
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-sm btn-primary">确定</button>
+					</span>
 				</div>
+			</div>
 			</div>
 		</div>
 		<div class="mt15">
@@ -97,5 +104,5 @@
 {% end %}
 
 {% block script %}
-	<script src="/static/js/policy.js"></script>
+	<script src="/static/js/log.js"></script>
 {% end %}

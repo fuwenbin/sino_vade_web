@@ -20,12 +20,12 @@ String.prototype.startWith=function(s){
 	return true;
 };
 
-var modalobj = {
-		id:'',
-		html:'',
-		transmit_data:{},
-		bind_event:function($m){
-		}
+document.modalobj = {
+	id:'',
+	html:'',
+	transmit_data:{},
+	bind_event:function($m){
+	}
 };
 
 $(document).ready(function(){
@@ -43,7 +43,7 @@ $(document).ready(function(){
         "positionClass": "toast-top-right",//弹出窗的位置
         "showDuration": "300",//显示的动画时间
         "hideDuration": "1000",//消失的动画时间
-        "timeOut": "3000", //展现时间
+        "timeOut": "1000", //展现时间
         "showEasing": "swing",//显示时的动画缓冲方式
         "hideEasing": "linear",//消失时的动画缓冲方式
         "showMethod": "fadeIn",//显示时的动画方式

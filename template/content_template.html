@@ -7,12 +7,16 @@
 		<link rel="stylesheet" href='/static/bootstrap/css/bootstrap.min.css' />
 		<link rel="stylesheet" href='/static/css/font-awesome/css/font-awesome.css' />
 		
-		<link rel="stylesheet" href='/static/css/toastr.css' />
-		
+		<link rel="stylesheet" href='/static/css/plugin/toastr.css' />
+		<!-- datepicker css -->
+		<link rel="stylesheet" href='/static/css/plugin/jquery-ui.min.css' />
 		<link href='/static/css/iframe.css'  rel='stylesheet' />
 		<link href='/static/css/head.css' rel='stylesheet' />
 		<link href='/static/css/common.css' rel='stylesheet' />
 		<link href='/static/css/fix-bootstrap.css' rel='stylesheet' />
+		
+		
+		<link href='/static/css/plugin/steps/jquery.steps.css'  rel='stylesheet' />
       {% block style %}{% end %}
 	</head>
      <body class="i-light-blue">
@@ -24,10 +28,17 @@
        
       <script src="/static/js/jquery-3.1.0.js"></script>
       <script src="/static/bootstrap/js/bootstrap.js"></script>
+      <!-- jquery validate js -->
       <script src="/static/js/plugin/jquery.validate.js"></script>
+      <!-- toastr.js -->
       <script src="/static/js/plugin/toastr.min.js"></script>
+      <!-- datepicker -->
+      <script src="/static/js/datepicker/jquery-ui.js"></script>
       <script src="/static/js/iframe.js"></script>
       <script src="/static/js/data.js"></script>
+      
+      
+      <script src="/static/js/plugin/jquery.steps.min.js"></script>
       {% block script %}
       {% end %}
 </body>

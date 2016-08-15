@@ -10,7 +10,7 @@ $(document).ready(function(){
 	//增加一个arp
 	$("#addbtn").click(function(){
 		var modal_html = $('#arp_modal').prop('outerHTML');
-		var modalobj = $.extend(modalobj,{
+		var modalobj = {
 			id:'#arp_modal',
 			html:modal_html,
 			bind_event:function($m){
@@ -90,7 +90,7 @@ $(document).ready(function(){
 					$m('#arp_form').submit();
 				});
 			}
-		});
+		};
 		parent.load_modal(modalobj);
 	});
 	
@@ -126,7 +126,7 @@ $(document).ready(function(){
 			});
 			
 		}else{
-			toastr.warning('请选择一行数据');
+			toastr.warning('请选择一行数据','这是标题');
 		}
 	});
 	

@@ -61,7 +61,9 @@ class vlanAddHandler(BaseHandler):
         httpclient = AsyncHTTPClient()
         reps = yield tornado.gen.Task(httpclient.fetch,self.api_host+'/interfaces',headers=self.api_headers)
         interfaces_data = json.loads(reps.body)    
-        html = self.render_string('modal/add_vlan_modal.html',interfaces_data = interfaces_data['interfaces'])
+        
+        html = self.render_string('modal/add_vlan_modal.html',un_selected_interfaces = [interface['name'] for interface in interfaces_data['interfaces']])
+        
         self.finish(html)
         
 
@@ -76,17 +78,39 @@ class vlanShowHandler(BaseHandler):
         vlan_data = json.loads(reps.body)
         reps = yield tornado.gen.Task(httpclient.fetch,self.api_host+'/interfaces',headers=self.api_headers)
         interfaces_data = json.loads(reps.body)        
-        vlan = vlan_data['vlan']
-        selected_interface_names = [ interface['interface'] for interface in vlan['interfaces']]
+        by_update_vlan = vlan_data['vlan']
+        selected_interface_names = [ interface['interface'] for interface in by_update_vlan['interfaces']]
         intefaces = interfaces_data['interfaces']
         un_selected_interfaces = []
+        vlan_ips = {}
+        
+        for vlan_ip in by_update_vlan['ipaddrs']:
+            ip_net = IP(vlan_ip['ip']).make_net(vlan_ip['netmask']).net().__str__()
+            if vlan_ips.has_key(ip_net):
+                if vlan_ip['type'] == '0':##主ip 
+                    vlan_ips[ip_net]['primary'] = vlan_ip['ip']
+                else:##辅IP
+                    vlan_ips[ip_net]['secondarys'].append(vlan_ip['ip'])
+            else:
+                vlan_ips[ip_net] = {}
+                vlan_ips[ip_net]['netmask'] = vlan_ip['netmask']
+                vlan_ips[ip_net]['ip_type'] = vlan_ip['ip_type']
+                if vlan_ip['type'] == '0':##主ip 
+                    vlan_ips[ip_net]['primary'] = vlan_ip['ip']
+                    vlan_ips[ip_net]['secondarys'] = []
+                else:##辅IP
+                    vlan_ips[ip_net]['secondarys'] = [vlan_ip['ip']]
+                    
+            
         for interface in intefaces:
             if interface['name'] not in selected_interface_names:
                 un_selected_interfaces.append(interface['name'])
-        html = self.render_string('modal/update_vlan_modal.html',vlan = vlan,un_selected_interfaces = un_selected_interfaces,selected_interface_names = selected_interface_names)
-        self.finish(html)
-
-
+        by_update_vlan['ipaddrs'] = vlan_ips.values()
+#         by_update_vlan['un_selected_interfaces'] = un_selected_interfaces
+#         by_update_vlan['selected_interface_names'] = selected_interface_names
+        html = self.render_string('modal/update_vlan_modal.html',vlan = by_update_vlan,vlan_ips=vlan_ips.values(),un_selected_interfaces = un_selected_interfaces,selected_interface_names = selected_interface_names)
+        by_update_vlan['html'] = html
+        self.finish(json.dumps(by_update_vlan))
 
 
 #### --------------------------------------------ARP 

@@ -11,19 +11,19 @@
 				  	
 						<div class="form-group">
 							<label for="hostname" class="col-md-2 font-normal control-label">名称:</label>
-							<div class="col-md-6">
+							<div class="col-md-8">
 							    <input type="text" class="form-control"  name="name" value="" />
 							</div>
 			            </div>
 		                <div class="form-group">
 		                    <label for="hostname" class="col-md-2 font-normal control-label">VLAN ID:</label>
-		                    <div class="col-md-6">
+		                    <div class="col-md-8">
 		                        <input type="text" class="form-control" name="vlanid" size="4" value="" />
 		                    </div>
 		                </div>
 						<div class="form-group">
 		                    <label for="hostname" class="col-md-2 font-normal control-label">WEB管理:</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-10">
 		                       <div class="radio">
 		                            <label class="col-md-6">
 		                                <input type="radio" checked name="web_enable" value="1" />
@@ -38,7 +38,7 @@
 		                </div>
 						<div class="form-group">
 		                    <label for="hostname" class="col-md-2 font-normal control-label">SSH管理:</label>
-		                    <div class="col-md-8">
+		                    <div class="col-md-10">
 		                        <div class="radio">
 		                            <label class="col-md-6">
 		                                <input type="radio" id="ssh_enable" name="ssh_enable" value="1" checked />
@@ -52,56 +52,83 @@
 		                    </div>
 		                </div>
 		
-						<div class="form-group"> 
+						<div class="form-group "> 
 		                    <label for="hostname" class="col-md-2 font-normal control-label">IP地址:</label>
-		                    <div class="col-md-9" id="ipset">
-		                    
+		                    <div class="col-md-8" id="ipset">
+		                    	<table class="table table-bordered m0">
+		                    		<thead>
+		                    			<tr >
+		                    				<th colspan="6">
+				                    			<div class="btn-group">
+						                        	<a class="btn btn-default addIp_btn btn-sm ipv4btn" href="#"> IPV4 <span class="fa fa-plus"></span></a>
+							                        <a class="btn btn-default addIp_btn btn-sm ipv6btn " href="#"> IPV6 <span class="fa fa-plus"></span></a>
+												</div>
+											</th>
+										</tr>
+		                    			<tr>
+		                    				<th>#</th>
+		                    				<th>类别</th>
+			                    			<th>主IP(Pimary)</th>
+			                    			<th>掩码</th>
+			                    			<th>辅IP(Secondary)</th>
+			                    			<th>操作</th>
+		                    			</tr>
+		                    		</thead>
+		                    		<tbody>
+		                    			<tr>
+		                    				<td><span>1</span></td>
+		                    				<td><span class="ip_type">IPV4</span></td>
+		                    				<td><span class="ip_primary">192.168.12.2</span></td>
+		                    				<td><span class="ip_netmask"> 28</span></td>
+		                    				<td class="dropdown">
+		                    				    <span class="ip_secondary">192.168.12.63</span> 
+		                    					<a class="dropdown-toggle " style="cursor:pointer" data-toggle="dropdown">更多<span class="fa fa-caret-down"></span></a>
+		                    					<ul class="dropdown-menu pull-left secondary_list" >
+			                    				 	<li><a href="#">192.168.12.3</a></li>
+			                    				 	<li><a href="#">192.168.12.4</a></li>
+			                    				 </ul>
+		                    				</td>
+		                    				<td>
+		                    				 <div class="btn-group dropdown">
+			                    				 <a class="btn btn-default btn-xs change_vlan_ip" href="#">编辑网段</a>
+			                    				 <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"><span class="fa fa-caret-down"></span></a>
+			                    				 <ul class="dropdown-menu pull-right">
+			                    				 	<li><a class="change_vlan_ip" href="#">编辑网段</a></li>
+			                    				 	<li><a class="text-danger" href="#">删除网段</a></li>
+			                    				 </ul>
+		                    				 </div>
+		                    				</td>
+		                    			</tr>
+		                    		</tbody>
+		                    	</table>
 		                    	
-								<div class="input-group mt15 btn-div">
-		                    		<div class="btn-group">
-				                          <a class="btn btn-default addIp_btn ipv4btn" href="#"> IPV4 <span class="fa fa-plus"></span></a>
-				                          <a class="btn btn-default addIp_btn ipv6btn" href="#"> IPV6 <span class="fa fa-plus"></span></a>
-									  </div>
-		                    	</div>
 							</div>
 		                </div>
 		                <div class="form-group">
 		                    <label for="hostname" class="col-md-2 font-normal control-label">端口成员:</label>
-		                    <div class="col-md-6 table-select">
-			                    <div class="col-md-6 p0">
-			                    	<table id="for_select_interface_table" class="table table-bordered">
-			                    		<thead>
-				                    		<tr>
-				                    			<th>候选端口</th>
-				                    		</tr>
-			                    		</thead>
-			                    		<tbody>
-			                    			{% for index in range(len(interfaces_data)) %}
-				                    			<tr>
-				                    				<td><span>{{ interfaces_data[index]['name']}}</span> <button type="button" style="float:right"><span class="add_interface_btn fa fa-plus"></span></button></td>
-				                    			</tr>
-			                    			{% end %}
-			                    			
-			                    		</tbody>
-			                    	</table>
-			                    </div>
-			                    <div class="col-md-6 p0" >
-			                    	<table id="selected_interface_table"  class="table table-bordered" >
-			                    		<thead >
-				                    		<tr>
-				                    			<th>已选端口</th>
-				                    		</tr>
-			                    		</thead>
-			                    		<tbody>
-			                    			
-			                    		</tbody>
-			                    	</table>
-			                    
-			                    </div>
-			                    <div style="clear:both"> </div>
+		                    <div class="col-md-8 table-layout">
+		                   		<fieldset class="table-layout-cell fildset-set">
+		                   			<legend class="clear-border">待选VLAN:</legend>
+			                     	<select id="for-select" class="form-control h200" multiple>
+			                     	{% for index in range(len(un_selected_interfaces)) %}
+		                    			<option>{{ un_selected_interfaces[index]}} </option>
+	                    			{% end %}
+			                       	</select>
+		                       	</fieldset>
+		                    	<div class="input-group-addon clear-border p0">
+		                    		<div class="">
+		                    			<a id="remove_vlans_btn" class="btn btn-default" style="float:left;" href="#"><span class="fa fa-angle-double-left"></span></a>
+		                    			<a id="add_vlans_btn" class="btn btn-default" style="float:left;" href="#"><span class="fa fa-angle-double-right"></span></a>
+		                    		</div>
+		                    	</div>
+		                     	<fieldset class="table-layout-cell fildset-set">
+		                     		<legend class="clear-border">已选VLAN:</legend>
+		                      		<select id="selected-options" class="form-control h200" multiple>
+		                      			<option> 未选中 </option>
+		                       		</select>
+		                      	</fieldset>
 		                    </div>
 		                </div>
-					
 				</div>
 				<div class="modal-footer">
 				  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

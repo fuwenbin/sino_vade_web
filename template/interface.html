@@ -36,7 +36,6 @@
 						<th>名称</th>												
 						<th>端口类型</th>																					
 						<th>mac地址</th>	
-						<th>启用</th>	
 						<th>速率</th>
 						<th>VLAN ID</th>
 					</tr>
@@ -48,13 +47,7 @@
 						<td>{{interfaces[index]['name']}}</td>
 						<td>{{interfaces[index]['mode']}}</td>
 						<td>{{interfaces[index]['mac']}}</td>
-						<td>{% set enable = interfaces[index]['enable'] %}
-							{% if enable == '1' %}
-								<span class="label label-success">是</span>
-							{% else %}
-								<span class="label label-warning">否</span>
-							{% end %}
-						</td>
+						
 						<td>{{interfaces[index]['speed']}}</td>
 						<td>{{interfaces[index]['vlan_id']}}</td>
 					</tr>

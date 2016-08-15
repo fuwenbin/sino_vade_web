@@ -15,9 +15,8 @@ class get_interface_datas(RequestHandler):
     def get(self):
         interfaces_data = {
                 "interfaces" : [ {
-                    "name" : "interface_name1",
+                    "name" : "GE1.10",
                     "mode" : str(random.randint(0,2)),
-                    "enable" : str(random.randint(0,1)),
                     "mac": "mac",
                     "status" : "up ", 
                     "speed" : "1000",
@@ -63,7 +62,7 @@ class get_vlans_datas(RequestHandler):
             'name':"vlan1",
             'vlanid':str(x+2),
             'interfaces':[{'interface':'GE1.1'},{'interface':'GE1.2'},{'interface':'GE1.3'}],
-            'ipaddrs':[{'ip':'192.168.1.1','netmask':'24','ip_type':'0'} for x in xrange(5)],
+            'ipaddrs':[{'ip':'192.168.1.'+str(random.randint(1,255)),'netmask':'24','ip_type':'0','type':str(random.randint(0,1))} for x in xrange(5)],
             } for x in xrange(10)
             ]          
         }
@@ -93,8 +92,11 @@ class get_vlan_data(RequestHandler):
             'interfaces':[{'interface':'GE1.1'},
                           {'interface':'GE1.2'},
                           {'interface':'GE1.3'}],
-            'ipaddrs':[{'ip':'192.168.1.1','netmask':'24','ip_type':'0','type':'1'},
-                       {'ip':'192.168.2.1','netmask':'24','ip_type':'0','type':'1'},
+            'ipaddrs':[{'ip':'192.168.1.1','netmask':'24','ip_type':'0','type':'0'},
+                       {'ip':'192.168.1.2','netmask':'24','ip_type':'0','type':'1'},
+                       {'ip':'192.168.1.3','netmask':'24','ip_type':'0','type':'1'},
+                       {'ip':'192.168.1.4','netmask':'24','ip_type':'0','type':'1'},
+                       {'ip':'192.168.2.1','netmask':'24','ip_type':'0','type':'0'},
                        {'ip':'192.168.3.1','netmask':'24','ip_type':'1','type':'0'}],
             } 
         }

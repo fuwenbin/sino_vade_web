@@ -1,9 +1,7 @@
 $(document).ready(function(){
-	//var snat_modal_html = document.getElementById('myModal').outHTML;
-	
 	
 	//vlan ip详情单击
-	$(".vlan_ip_detail").click(function(){
+	$(".vlan_ip_detail").click(function(event){
 		var vlan_name = $(this).parents('tr').find('.vlan_name').text();
 		$.ajax({
 			type:'GET',
@@ -13,7 +11,7 @@ $(document).ready(function(){
 			success:function(data){
 				var modal_html = $('#vlan_ip_modal').prop('outerHTML');
 				var ips = data.vlan.ipaddrs;
-				var modalobj = $.extend(modalobj,{
+				var modalobj = {
 						id:'#vlan_ip_modal',
 						html:modal_html,
 						bind_event:function($m){
@@ -27,10 +25,11 @@ $(document).ready(function(){
 								$m('#vlan_ip_table tbody').append(html);
 							}
 						}
-				});
+					};
 				parent.load_modal(modalobj);	
 			}
 		});
+		event.stopPropagation();
 		
 	});
 	//显示增加vlan的modal
@@ -41,11 +40,11 @@ $(document).ready(function(){
 			url:'/hl/vlan/add',
 			success:function(html_data){
 				
-				var modalobj = $.extend(modalobj,{
+				var modalobj = {
 						id:'#add_vlan_modal',
 						html:html_data,
 						bind_event:bind_vlan_event				
-						});
+						};
 				parent.load_modal(modalobj);
 			}
 		});
@@ -57,23 +56,22 @@ $(document).ready(function(){
 		$('#vlan-table tbody tr').not(this).removeClass('row-selected');
 	});
 	
-	//vlan列表 行双击
+	//vlan列表 行双击 ，修改VLAN属性
 	$('#vlan-table tbody tr').dblclick(function(){
 		var vlan_name = $(this).find('.vlan_name').text();
-		transmit_datas = {
-			vlan_name:vlan_name,
-		}
 		$.ajax({
 			type:'GET',
 			url:'/hl/vlan/update',
+			dataType:'json',
 			data:'name='+vlan_name,
-			success:function(html_data){
-				var modalobj = $.extend(modalobj,{
+			success:function(vlan_data){
+				var html_data = vlan_data.html;				
+				var modalobj = {
 						id:'#update_vlan_modal',
 						html:html_data,
-						transmit_data:transmit_datas,
+						transmit_data:vlan_data,
 						bind_event:bind_vlan_event
-				});
+				};
 				parent.load_modal(modalobj);
 			}
 		});
@@ -89,97 +87,256 @@ $(document).ready(function(){
 	}
 	
 	//绑定vlan配置modal中的事件
-	function bind_vlan_event($m,tramsmit_datas){
+	function bind_vlan_event($m,vlan_obj){
 		
-		//控制ip设置的增减
-		$m('#ipset').on('click','.delIp_btn',function(e){
-				$m(e.target).parents('.ip').next('.error').remove();
-				$m(e.target).parents('.ip').next('.error').remove();
-				$m(e.target).parents('.ip').remove();
-		});
-		//增加ipv4
-		var ipcount = 0;
-		$m('#ipset .btn-group .ipv4btn').click(function(){
-			var html_content = $m('#ipset .ip').prop('outerHTML');
-			ipcount = ipcount+1;
-			var html_content = '<div class="input-group mt15 ip" >'+
-								'<input id="ip'+ipcount+'" type="text" class="form-control " name="ip'+ipcount+'" placeholder="请输入IPV4 类型地址" />'+
-				               	'<span class="input-group-btn split"><a type="button" class="btn btn-white" >/</a> </span>'+
-				               	'<div class="input-group-btn">'+
-									'<input id="netmask'+ipcount+'" type="text" class="form-control" style="width:68px;" name="netmask_ipv4" placeholder="ip掩码" />'+
-								'</div>'+
-								'<div class="input-group-btn type">'+
-									'<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">主IP(Pimary)<span class="caret"></span></button>'+
-				                    '<ul class="dropdown-menu">'+
-				                          '<li><a href="#" value="0">主IP(Pimary)</a></li>'+
-				                          '<li><a href="#" value="1">辅IP(Secondary)</a></li>'+
-				                    '</ul>'+
-								'</div>'+
-				                '<div class="input-group-btn">'+
-				                     '<a class="btn btn-default delIp_btn" href="#"> <span class="glyphicon glyphicon-remove"></span></a>'+
-								'</div>'+
-								'<input type="hidden" name="ip_type" value="0" />'+
-				                '<input type="hidden" name="type" value="0" />'+
-				               '</div>'
+		function vlan_ip_event_bind(m$,ip_obj){
+			//加载传递过来的数据
+			if(ip_obj.primary){
+				$m('input[name=primary]').val(ip_obj.primary);
+			}
+			if(ip_obj.netmask){
+				$m('input[name=netmask]').val(ip_obj.netmask);
+			}
+			if(ip_obj.secondarys){
+				var secondary_ips = ip_obj.secondarys;
+				for(i=0;i<secondary_ips.length;i++){
+					if(i==0){
+						$m('input[name=secondary]').val(secondary_ips[i]);
+						continue;
+					}
+					var secondary_html = '<div class="form-group secondary-ip-set">'+
+								            '<label for="hostname" class="col-md-3 font-normal control-label">辅IP(Secondary):</label>'+
+								            '<div class="col-md-8">'+
+								            	'<div class="input-group">'+
+								                    '<input type="text" class="form-control secondary" name="secondary'+i+'" value="'+secondary_ips[i]+'" >'+
+								                    '<div class="input-group-btn">'+
+														'<a class="btn btn-default add-secondary-ip" href="#"> <span class="fa fa-plus-circle"></span></a>'+
+														'<a class="btn btn-default delete-secondary-ip" href="#"> <span class="fa fa-minus-circle"></span></a>'+
+													'</div>'+
+												'</div>'+
+											'</div>'+
+								        '</div>'
+					$m('#add_vlan_ip_modal .modal-body').append(secondary_html);
+				}
+			}
 			
-			var ipset = $(html_content);
-			$m('#ipset .btn-div').before(ipset.prop('outerHTML'));
-			$m('#ip'+ipcount).rules('add',{
-					required:true,
+			
+			//增加一个辅助IP
+			var ipcount = 0;
+			$m('#add_vlan_ip_modal .modal-body').on('click','.add-secondary-ip',function(e){
+				ipcount = ipcount+1;
+				var secondary_html = '<div class="form-group secondary-ip-set">'+
+					                    '<label for="hostname" class="col-md-3 font-normal control-label">辅IP(Secondary):</label>'+
+					                    '<div class="col-md-8">'+
+					                    	'<div class="input-group">'+
+						                        '<input type="text" class="form-control secondary" name="secondary'+ipcount+'" value="" >'+
+						                        '<div class="input-group-btn">'+
+													'<a class="btn btn-default add-secondary-ip" href="#"> <span class="fa fa-plus-circle"></span></a>'+
+													'<a class="btn btn-default delete-secondary-ip" href="#"> <span class="fa fa-minus-circle"></span></a>'+
+												'</div>'+
+											'</div>'+
+										'</div>'+
+					                '</div>'
+										
+				$m(e.target).parents('.secondary-ip-set').after(secondary_html);
+				var input_name = 'secondary'+ipcount;
+				//动态添加验证
+				$m('#vlanip_form input[name=secondary'+ipcount+']').rules('add',{
 					ipv4:true,
+					remote:{
+						type:'POST',
+						url:'/hl/validate/vlan/ip/secondary',
+						data:{
+							netmask:function(){return $m('input[name=netmask]').val()},
+							ip_type:function(){return '0'},
+							primary:function(){
+								return $m('input[name=primary]').val()
+							},
+							secondary:function(){
+								return $m('input[name='+input_name+']').val();
+							}
+						}
+					},
 					messages:{
-						required:'请填写IPV4内容，否则请删除当前行.'
+						remote:'与主IP不是同一个地址段或IP地址为广播地址和网络地址.'
 					}
 				});
-			$m('#netmask'+ipcount).rules('add',{
-				required:true,
-				range:[0,32],
 			});
-			$m('.ip input').on('focus',function(){
-				$(this).parents('.ip').next('#ipcheck').remove();
+			//删除一个 辅助IP
+			$m('#add_vlan_ip_modal .modal-body').on('click','.delete-secondary-ip',function(e){
+				if($m('.secondary-ip-set').length==1) return;
+				$m(e.target).parents('.secondary-ip-set').remove();
 			});
-		});
-		//增加ipv6
-		$m('#ipset .btn-group .ipv6btn').click(function(){
-			ipcount = ipcount+1;
-			var html_content = $m('#ipset .ip').prop('outerHTML');
-			var html_content = '<div class="input-group mt15 ip" >'+
-								'<input id="ip'+ipcount+'" type="text" class="form-control " name="ip'+ipcount+'" placeholder="请输入IPV6 类型地址" />'+
-					           	'<span class="input-group-btn split"><a type="button" class="btn btn-white" >/</a> </span>'+
-					           	'<div class="input-group-btn">'+
-									'<input id="netmask'+ipcount+'" type="text" class="form-control" style="width:68px;" name="netmask_ipv6" placeholder="ip掩码" />'+
-								'</div>'+
-								'<div class="input-group-btn type">'+
-									'<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">主IP(Pimary)<span class="caret"></span></button>'+
-					                '<ul class="dropdown-menu">'+
-					                      '<li><a href="#" value="0">主IP(Pimary)</a></li>'+
-					                      '<li><a href="#" value="1">辅IP(Secondary)</a></li>'+
-					                '</ul>'+
-								'</div>'+
-					            '<div class="input-group-btn">'+
-					                 '<a class="btn btn-default delIp_btn" href="#"> <span class="glyphicon glyphicon-remove"></span></a>'+
-								'</div>'+
-								'<input type="hidden" name="ip_type" value="1" />'+
-					            '<input type="hidden" name="type" value="0" />'+
-					           '</div>'
-			var ipset = $(html_content);
-			$m('#ipset .btn-div').before(ipset.prop('outerHTML'));
-			$m('#ip'+ipcount).rules('add',{
-				required:true,
-				ipv6:true,
-				messages:{
-					required:'请填写IPV6内容，否则请删除当前行.'
+			// 保存VLAN IP数据
+			$m('#add_vlan_ip_modal .btn-primary').on('click',function(e){
+				var valid_value = $m('#vlanip_form').valid();
+				if(valid_value){
+					var ip_length = $m('#ipset table tbody tr').length;
+					var primary_ip = $m('input[name=primary]').val();
+					var netmask = $m('input[name=netmask]').val();
+					var secondary_ips = []
+					$m('.secondary').each(function(index,element){
+						var ip_val = $m(element).val();
+						if(ip_val){
+							secondary_ips.push(ip_val);
+						}
+					});
+					
+					if(ip_obj.primary){//如果ip_num存在 即为修改vlanip
+						var vlan_ip_tr = $m('#ipset [id="'+ip_obj.primary+'/'+ip_obj.netmask+'"]');
+						vlan_ip_tr.find('.ip_primary').text(primary_ip);
+						vlan_ip_tr.find('.ip_netmask').text(netmask);
+						if(secondary_ips.length>0){
+							vlan_ip_tr.find('.ip_secondary').text(secondary_ips[0]);
+							var secondary_list = vlan_ip_tr.find('.secondary_list');
+							secondary_list.find('li').remove();
+							for(i=1;i<secondary_ips.length;i++){
+								secondary_list.append('<li><a href="#">'+secondary_ips[i]+'</a></li>')
+		                    }
+						}
+						// 找到内存中的数据，并同步界面与内存的数据
+						
+						ip_obj.primary = primary_ip;
+						ip_obj.netmask = netmask;
+						ip_obj.secondarys = secondary_ips;						
+					}else{
+						var vlan_ip_tr = '<tr id="'+primary+'/'+netmask+'">'+
+		                    				'<td><span>'+ip_length+'</span></td>'+
+		                    				'<td><span class="ip_type">IPV4</span></td>'+
+		                    				'<td><span class="ip_primary">'+primary_ip+'</span></td>'+
+		                    				'<td><span class="ip_netmask">'+netmask+'</span></td>'+
+		                    				'<td class="dropdown">'+
+	                    				    	'<span class="ip_secondary">'+secondary_ips[0]+'</span>'+
+	                    						'<a class="dropdown-toggle" style="cursor:pointer" data-toggle="dropdown">更多<span class="fa fa-caret-down"></span></a>'+
+	                    						'<ul class="dropdown-menu pull-left secondary_list" >'
+		                    				 		
+	                    for(i=1;i<secondary_ips.length;i++){
+	                    	vlan_ip_tr = vlan_ip_tr+'<li><a href="#">'+secondary_ips[i]+'</a></li>'
+	                    }                    
+						vlan_ip_tr = vlan_ip_tr+'</ul></td><td><a class="btn btn-default btn-xs updatebtn" href="#">修改<span class="fa fa-edit"></span></a></td></tr>'
+						$m(vlan_ip_tr).insertBefore($m('#ipset table tbody tr:first-child'))
+						vlan_obj.ipaddrs.append({
+							primary:primary_ip,
+							netmask:netmask,
+							secondarys:secondary_ips
+						});
+					}
+					$m('#add_vlan_ip_modal').modal('hide');
 				}
 			});
 			
-			$m('#netmask'+ipcount).rules('add',{
-				required:true,
-				range:[0,128],
-			});
 			
-			$m('.ip input').on('focus',function(){
-				$(this).parents('.ip').next('#ipcheck').remove();
+			
+			var primary_remote_valid = {
+					type:'POST',
+					url:'/hl/validate/vlan/ip/primary',
+					async:false,
+					data:{
+						vlan_name:function(){return vlan_obj.name;},
+						netmask:function(){return $m('input[name=netmask]').val()},
+						ip_type:function(){return '0'},
+						primary:function(){
+							return $m('input[name=primary]').val();
+						},
+						current_vlan_ips:function(){//返回当前界面上的所有vlan ip数据
+							return JSON.stringify(vlan_obj.ipaddrs);
+						}
+					}
+				};
+			//定义vlan ip的验证
+			$m('#vlanip_form').validate({
+				onkeyup:false,
+				debug:true,
+				groups:{primary_ip:"primary netmask"},
+				rules:{
+					primary:{
+						required:true,
+						ipv4:true,
+					},
+					netmask:{
+						required:true,
+						range:[1,32],
+						remote:primary_remote_valid
+					},
+					secondary:{
+						ipv4:true,
+						remote:{
+							type:'POST',
+							url:'/hl/validate/vlan/ip/secondary',
+							data:{
+								netmask:function(){return $m('input[name=netmask]').val()},
+								ip_type:function(){return '0'},
+								primary:function(){
+									return $m('input[name=primary]').val()
+								}
+								
+							}
+						}
+					}
+				},
+				messages:{
+					netmask:{
+						remote:"格式错误,IP地址段重叠或IP地址为广播地址和网络地址"
+					},
+					secondary:{
+						remote:"与主IP不是同一个地址段或IP地址为广播地址和网络地址"
+					}
+				},
+				errorPlacement: function(error, element) {  
+					if($m(element).attr('name')=='primary' || $m(element).attr('name')== 'netmask'){
+						error.insertAfter(element.parent());
+					}else{
+						error.insertAfter(element.parent());
+					}
+				}
 			});
+		}
+		/* ------------------------------------------- VLAN IP 界面处理逻辑分割线                 ----------------------------------- */
+		//增加ipv4 网段
+		$m('#ipset .btn-group .ipv4btn').click(function(){
+			
+			var html_content = $($('#add_vlan_ip_modal').prop('outerHTML')).addClass('ipv4');
+			var ip_type = '0';//ipv4
+			vlan_ip_obj = {
+				ip_type: ip_type
+			}
+			var modalobj = {
+					id:'#add_vlan_ip_modal',
+					html:html_content,
+					transmit_data:vlan_ip_obj,
+					bind_event:vlan_ip_event_bind
+			};
+			parent.load_modal(modalobj);
+		});
+		//增加一个IPV6 网段
+		$m('#ipset .btn-group .ipv6btn').click(function(){
+			var html_content = $($('#add_vlan_ip_modal').prop('outerHTML')).addClass('ipv6');
+			var modalobj ={
+					id:'#add_vlan_ip_modal',
+					html:html_content,
+					bind_event:function(){
+					}
+				};
+			parent.load_modal(modalobj);
+		});
+		//修改已经设置的VLAN IP网段
+		$m('#ipset').on('click','.change_vlan_ip',function(event){
+			var tr_id = $(event.target).parents('tr').attr('id');
+			var vlan_ip_obj = undefined;
+			var ips = vlan_obj.ipaddrs;
+			for(i=0;i<ips.length;i++){
+				if((ips[i].primary+'/'+ips[i].netmask) == tr_id){
+					vlan_ip_obj = ips[i];
+				}
+			}
+			var html_content = $($('#add_vlan_ip_modal').prop('outerHTML')).addClass('ipv4');	
+			var modalobj = {
+					id:'#add_vlan_ip_modal',
+					html:html_content,
+					transmit_data:vlan_ip_obj,
+					bind_event:vlan_ip_event_bind
+			};
+			parent.load_modal(modalobj);
 			
 		});
 		
@@ -194,41 +351,11 @@ $(document).ready(function(){
 		
 		
 		//控制端口选择的增加
-		$m('#for_select_interface_table').on('click',function(e){
-			if(e.target.type == 'button'||e.target.parentNode.type =='button'){
-				var tr_obj = $m(e.target).parents('tr');
-				tr_obj.find('.glyphicon-plus').removeClass('glyphicon-plus').addClass('glyphicon-remove');
-				var html_content = tr_obj.prop('outerHTML');
-				tr_obj.remove();
-				$m('#selected_interface_table tbody').append(html_content);
-			}
-			
-		});
+		
 		//控制端口选择减少
-		$m('#selected_interface_table').on('click',function(e){
-			if(e.target.type == 'button'||e.target.parentNode.type =='button'){
-				var tr_obj = $m(e.target).parents('tr');
-				tr_obj.find('.glyphicon-remove').removeClass('glyphicon-remove').addClass('glyphicon-plus');
-				var html_content = tr_obj.prop('outerHTML');
-				tr_obj.remove();
-				$m('#for_select_interface_table tbody').append(html_content);
-			}
-		});
 		
-		$m.validator.addMethod('ipv4',function(value,element,param){
-			
-			var re =  /^([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([0-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.([1-9]|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$/;
-			return re.test(value);
-			
-		},'ipv4格式错误');
 		
-		$m.validator.addMethod('ipv6',function(value,element,param){
-			
-			var re = /^([\da-fA-F]{1,4}:){6}((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$|^::([\da-fA-F]{1,4}:){0,4}((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$|^([\da-fA-F]{1,4}:):([\da-fA-F]{1,4}:){0,3}((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$|^([\da-fA-F]{1,4}:){2}:([\da-fA-F]{1,4}:){0,2}((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$|^([\da-fA-F]{1,4}:){3}:([\da-fA-F]{1,4}:){0,1}((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$|^([\da-fA-F]{1,4}:){4}:((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$|^([\da-fA-F]{1,4}:){7}[\da-fA-F]{1,4}$|^:((:[\da-fA-F]{1,4}){1,6}|:)$|^[\da-fA-F]{1,4}:((:[\da-fA-F]{1,4}){1,5}|:)$|^([\da-fA-F]{1,4}:){2}((:[\da-fA-F]{1,4}){1,4}|:)$|^([\da-fA-F]{1,4}:){3}((:[\da-fA-F]{1,4}){1,3}|:)$|^([\da-fA-F]{1,4}:){4}((:[\da-fA-F]{1,4}){1,2}|:)$|^([\da-fA-F]{1,4}:){5}:([\da-fA-F]{1,4})?$|^([\da-fA-F]{1,4}:){6}:$/;
-			return re.test(value);
-			
-		},'ipv6格式错误');
-		
+		//VLAN modal vlalidate
 		$m('#vlan_form').validate({
 			onkeyup:false,
 			ignore: ".ignore",
@@ -237,12 +364,12 @@ $(document).ready(function(){
 					required:true,
 					re:/^\w{1,16}$/,
 					remote:{
-						type:'get',
+						type:'GET',
 						url:'/hl/validate/vlanname',
 						data:{
 							exclude:function(){
-								if(tramsmit_datas){
-									return tramsmit_datas.vlan_name;
+								if(vlan_obj.name){
+									return vlan_obj.name;
 								}else{
 									return '';
 								}
@@ -264,18 +391,8 @@ $(document).ready(function(){
 				vlanid:{
 					range:"VLAN ID 范围：2-4094",
 					remote:"该ID已经存在",
-				},
-				
-				netmask_ipv4:{
-					required:"请填写掩码内容，否则请删除当前行!",
-					range:"请输入IPv4掩码值范围： 0-32",
-					remote:"IP地址格式不能为网络地址和广播地址 ，且不能与其他他VLAN IP存在重叠域"
-				},
-				netmask_ipv6:{
-					required:"请填写掩码内容，否则请删除当前行!",
-					range:"请输入IPv6掩码值范围： 0-128",
-					remote:"IP地址格式不能为网络地址和广播地址 ，且不能与其他他VLAN IP存在重叠域"
 				}
+				
 			},
 			errorPlacement: function(error, element) {  
 				if($m(element).attr('name').startWith('ip')){
@@ -291,54 +408,6 @@ $(document).ready(function(){
 				var vlanid = $m('#vlan_form input[name=vlanid]').val();
 				var web_enable = $m('#vlan_form input:radio[name=web_enable]:checked').val();
 				var ssh_enable = $m('#vlan_form input:radio[name=ssh_enable]:checked').val();
-				var ipaddrs = new Array();
-				var no_valid_ip = undefined;
-				$m('#vlan_form .ip').each(function(index,element){
-					var inputs = $m(element).find('input');
-					var ip = inputs.eq(0).val();
-					var netmask = inputs.eq(1).val();
-					var ip_type = $m(element).find('input[name=ip_type]').val();
-					var type = $m(element).find('input[name=type]').val();
-					var ipobj = {
-						ip:ip,
-						netmask:netmask,
-						ip_type:ip_type,
-						type:type
-					};
-					validate_data = {
-						cip:ipobj,
-						other:ipaddrs,
-						exclude_vlan:tramsmit_datas.vlan_name?tramsmit_datas.vlan_name:'' //如果是修改某个某vlan，本vlan原有的vlan应该排除对比验证之外
-					}
-					var current_html = this;
-					//提交每一个ip vlan的网络地址，广播地址以及重叠域检验。
-					
-					return $m.ajax({
-						type:'POST',
-						url:'/hl/validate/vlanip',
-						async:false, 
-						data:JSON.stringify(validate_data),
-						dataType:'json',
-						success:function(data){
-							if(data.status!='success'){
-								ipobj.element = current_html;
-								ipobj.reason = data.reason;
-								no_valid_ip = ipobj;								
-								return false;
-							}else{
-								ipaddrs.push(ipobj);
-								return true;
-							}
-						}
-					});
-					
-				});
-				if(no_valid_ip){
-					element = no_valid_ip.element;
-					var error_html = '<label id="ipcheck" class="error">'+no_valid_ip.reason+'</label>'
-					$m(error_html).insertAfter($m(element));
-					return 
-				}
 
 				var interfaces = new Array();
 				$m('#selected_interface_table tbody tr td').each(function(index,element){
@@ -355,7 +424,7 @@ $(document).ready(function(){
 						ipaddrs:ipaddrs,
 						interfaces:interfaces,
 				}
-				var method = tramsmit_datas.vlan_name?"PUT":"POST";
+				var method = vlan_obj.name?"PUT":"POST";
 				parent.loading();
 				$m.ajax({
 					type:method,
@@ -363,23 +432,23 @@ $(document).ready(function(){
 					data:JSON.stringify(vlanobj),
 					dataType:'json',
 					success:function(data){
-						if(tramsmit_datas.vlan_name){
+						if(vlan_obj.name){
 							$m('#update_vlan_modal').modal('hide');
 						}else{
 							$m('#add_vlan_modal').modal('hide');	
 						}
-						
 						parent.unloading();
 						if(data.status=='success'){
 							var message = "增加成功"
-							if(tramsmit_datas.vlan_name){
+								
+							$('#interface_table tbody tr:first-child').before();
+							if(vlan_obj.name){
 								message = "修改成功"
-									
 							}
 							toastr.success(message);
 						}else{
 							var message = "增加失败"
-							if(tramsmit_datas.vlan_name){
+							if(vlan_obj.name){
 								message = "修改失败"
 							}
 							toastr.warning(message);

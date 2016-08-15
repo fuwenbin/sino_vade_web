@@ -6,13 +6,21 @@
       <title>{% block title %}{% end %} </title>
       <link rel="stylesheet" href='/static/bootstrap/css/bootstrap.min.css' />
       <link rel="stylesheet" href='/static/css/font-awesome/css/font-awesome.css' />
+      <link href="/static/css/plugin/animate.css" rel="stylesheet" />
+      <link rel="stylesheet" href='/static/css/plugin/toastr.css' />
+      <!-- jquery validate css -->
+	  <link href="/static/css/validate.css" rel="stylesheet" />
+	  <!-- wizard css -->
+	  <link href='/static/css/plugin/steps/jquery.steps.css'  rel='stylesheet' />
+	  <!-- 自定义 -->
       <link href='/static/css/nfv.css'  rel='stylesheet' />
       <link href='/static/css/head.css' rel='stylesheet' />
       <link href='/static/css/sidebar.css' rel='stylesheet' />
       <link href='/static/css/common.css' rel='stylesheet' />
 	  <link href='/static/css/fix-bootstrap.css' rel='stylesheet' />
-	  <link href="/static/css/animate.css" rel="stylesheet" />
-	  <link href="/static/css/validate.css" rel="stylesheet" />
+	  
+
+	  
       {% block style %}{% end %}
     </head>
     <body>   		
@@ -47,9 +55,16 @@
 	  </script>
       <script src="/static/js/jquery-3.1.0.js"></script>
       <script src="/static/bootstrap/js/bootstrap.js"></script>
+      <!-- jquery validate js -->
       <script src="/static/js/plugin/jquery.validate.js"></script>
       <script src="/static/js/plugin/jquery.validate.messages_zh.js"></script>
+      
+      <script src="/static/js/plugin/jquery.steps.min.js"></script>
+      <!-- 可删除了 -->
       <script src="/static/js/plugin/jasny-bootstrap.min.js"></script>
+      <!-- toastr.js -->
+      <script src="/static/js/plugin/toastr.min.js"></script>
+      <!-- 自定义 -->
       <script src="/static/js/index.js"></script>
       <script src="/static/js/sidebar.js"></script>
       

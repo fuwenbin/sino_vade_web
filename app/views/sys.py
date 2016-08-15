@@ -6,7 +6,7 @@ Created on 2016年6月22日
 '''
 from utils import BaseHandler
 from router import Route
-
+import time
 @Route("/config")
 class configHandler(BaseHandler):
     def get(self):
@@ -61,7 +61,9 @@ class sysinfoHandler(BaseHandler):
 class logHandler(BaseHandler):
     
     def get(self):
-        self.render("log.html")
+        ISOTIMEFORMAT='%Y/%m/%d'
+        now_date = time.strftime(ISOTIMEFORMAT)
+        self.render("log.html",now = now_date)
     
 @Route(Route.confg_prefix+"/warning")
 class warnHandler(BaseHandler):

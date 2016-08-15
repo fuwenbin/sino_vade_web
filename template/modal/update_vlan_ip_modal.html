@@ -1,0 +1,48 @@
+
+<div class="modal fade" id="add_vlan_ip_modal">
+	<div class="modal-dialog ">
+		<div class="modal-content">
+			<form  id="vlanip_form" class="form-horizontal">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="modal-title">增加VLAN IP</h4>
+			</div>
+			<div class="modal-body">
+
+				<div class="form-group">
+					<div class="input-group mt15 ip" >
+						<label for="hostname" class="col-md-3 font-normal control-label">* 主IP(Pimary):</label>
+						<div class="col-md-9">
+							<div class="input-group">
+								<input type="text" id="from" class="input-sm form-control" style="width:230px;"  name="primary" placeholder="IPV4 address"/>
+			                    <span class="input-group-addon">/</span>
+			                    <input type="text" id="to" class="input-sm form-control" style="width:35%;" name="netmask" placeholder="掩码" />
+		                    </div>
+						</div>
+					</div>
+		        </div>
+		        
+                <div class="form-group secondary-ip-set">
+                    <label for="hostname" class="col-md-3 font-normal control-label">辅IP(Secondary):</label>
+                    <div class="col-md-8">
+                    	<div class="input-group">
+	                        <input type="text" class="form-control secondary" name="secondary" size="4" value="" >
+	                        <div class="input-group-btn">
+								<a class="btn btn-default add-secondary-ip" href="#"> <span class="fa fa-plus-circle"></span></a>
+								<a class="btn btn-default delete-secondary-ip" href="#"> <span class="fa fa-minus-circle"></span></a>
+							</div>
+						</div>
+					</div>
+                </div>		
+	              	
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			  <button type="button" class="btn btn-primary">确定</button>
+			</div>
+		</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+		
+			

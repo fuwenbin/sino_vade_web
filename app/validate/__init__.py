@@ -67,80 +67,82 @@ class valid_vlan_id(BaseHandler):
         self.finish(test_pass)
 
 
-@Route('/validate/vlanip')
-class valid_vlan_ip(BaseHandler):
+@Route('/validate/vlan/ip/primary')
+class valid_vlan_primary_ip(BaseHandler):
     @tornado.web.asynchronous
     @tornado.gen.coroutine
     def post(self):
-        '''validate vlan of ip'''
-        
-        from IPy import IP
-        valid_obj =  json.loads(self.request.body)
-        wait_valid_ip_obj = valid_obj['cip']
-        other_ipaddrs = valid_obj['other']
-        exclude_vlan_name = valid_obj['exclude_vlan']
-        result = {
-            'status':'success',
-            'reason':''    
-            }
-        wait_validate_ip = []
-        ip = wait_valid_ip_obj['ip']
-        netmask = wait_valid_ip_obj['netmask']
-        ##检查网络地址和广播域是否被设置为vlan ip
+        vlan_name = self.get_argument('vlan_name', default='')
+        current_vlan_ips = self.get_argument('current_vlan_ips', default='{}')
+        primary_ip = self.get_argument("primary", default="")
+        netmask = self.get_argument("netmask", default="")
+        ip_type = self.get_argument("ip_type", default="")
+        if not primary_ip or not netmask:
+            self.finish("true")
+            return 
         ip_obj = None
         try:
-            ip_obj = IP(ip).make_net(netmask)
+            ip_obj = IP(primary_ip).make_net(netmask)
             net_addr = ip_obj.net()
             broadcast_addr = ip_obj.broadcast()
-            if ip == str(net_addr) or ip == str(broadcast_addr):
-                error_message = u"vlan ip(%s) 地址不能为网络地址或广播地址"%str(ip)
-                result['status'] = 'failure'
-                result['reason'] = error_message
-                self.finish(json.dumps(result))
+            if primary_ip == str(net_addr) or primary_ip == str(broadcast_addr):
+                print(u"""vlan ip 地址不能为网络地址或广播地址""")
+                self.finish("false")
                 return
-        except :
+        except Exception,e:
             print("bad command,ip error.")
-            error_message = "ip:%s/%s 格式错误"%(ip,netmask)
-            result['status'] = 'failure'
-            result['reason'] = error_message
-            self.finish(json.dumps(result))
+            self.finish("false")
             return
-                 
-            
         httpclient = AsyncHTTPClient()
         reps = yield tornado.gen.Task(httpclient.fetch,self.api_host+'/vlans',headers=self.api_headers)
         vlandatas = json.loads(reps.body)
         exist_vlan_ip = []
         for vlan in vlandatas['vlans']:
-            if exclude_vlan_name == vlan['name']:
+            if vlan['name'] == vlan_name:##排除当前VLAN中的IP 不做验证
                 continue
             vlan_ips = vlan['ipaddrs']
             for vlan_ip in vlan_ips:
                 exist_vlan_ip.append(vlan_ip)
-        
-        ##与页面其他vlan ip做比较检查是否存在重叠域
-        for tipobj in other_ipaddrs:
-            tip = IP(tipobj['ip']).make_net(tipobj['netmask'])
-            if wait_valid_ip_obj['ip_type'] <> tipobj['ip_type']:
-                continue
-            if ip_obj.overlaps(tip.__str__()):
-                print("the ipaddres has overlaps.")
-                error_message = u"ip:%s/%s 与其他VLAN IP(%s)存在重叠域"%(wait_valid_ip_obj['ip'],wait_valid_ip_obj['netmask'],tip)
-                result['status'] = 'failure'
-                result['reason'] = error_message
-                self.finish(json.dumps(result))
+        for vlan in current_vlan_ips:   ##加上界面上已有的 IP  需要做验证
+            vlan['type'] = '1'
+            exist_vlan_ip.append(vlan)
         ##与后端已有vlan ip做比较 检查是否存在重叠域
         for tipobj in exist_vlan_ip:
-            if wait_valid_ip_obj['ip_type'] <> tipobj['ip_type']:
+            if ip_type <> tipobj['ip_type']:  #不相同的ip类型不需要比较
+                continue
+            if tipobj['type'] == '1': # 辅助IP不作为比较地址段重叠的依据
                 continue
             tip = IP(tipobj['ip']).make_net(tipobj['netmask'])
             if ip_obj.overlaps(tip.__str__()):
-                print("the ipaddres has overlaps.")
-                error_message = u"ip:%s/%s 与其他VLAN IP(%s)存在重叠域"%(wait_valid_ip_obj['ip'],wait_valid_ip_obj['netmask'],tip)
-                result['status'] = 'failure'
-                result['reason'] = error_message
-                self.finish(json.dumps(result))
+                print(u"""与其他地址存在重叠域""")
+                self.finish('false')
                 return
-                
-            
-        self.finish(json.dumps(result))
+        self.finish("true")
+
+@Route('/validate/vlan/ip/secondary')
+class valid_vlan_ip(BaseHandler):
+    @tornado.web.asynchronous
+    @tornado.gen.coroutine
+    def post(self):
+        u'''验证secondary ip与主ip是否在同一个地址段中，并且scondary ip不是网络地址或者广播地址'''
+        original_ip = json.loads(self.get_argument('original', default='{}'))
+        current_vlan_ips = self.get_argument('current_vlan_ips', default='{}')
+        primary_ip = self.get_argument("primary", default="")
+        netmask = self.get_argument("netmask", default="")
+        secondary_ip = self.get_argument("secondary", default="")
+        if not primary_ip or not netmask:
+            self.finish("true")
+        try:
+            primary = IP(primary_ip).make_net(netmask)
+            net_addr = primary.net()
+            broadcast_addr = primary.broadcast()
+            if secondary_ip == str(net_addr) or secondary_ip == str(broadcast_addr):
+                self.finish('false')
+                return
+            if not primary.overlaps(secondary_ip):
+                self.finish("false")
+                return
+        except Exception,e:
+            self.finish("true")
+            return            
+        self.finish('true')
